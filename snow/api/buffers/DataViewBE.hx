@@ -98,7 +98,7 @@ import snow.api.buffers.DataView;
             this.setFloat64( byteOffset, value, false);
         }
 
-    } //DataViewBE
+    }
 
 
 #else
@@ -137,7 +137,7 @@ import snow.api.buffers.DataView;
             this.byteLength = viewByteLength;
             this.byteOffset = byteOffset;
 
-        } //new
+        }
 
         #if !snow_no_inline_buffers inline #end
         public function getInt8(byteOffset:Int) : Int {
@@ -219,6 +219,6 @@ import snow.api.buffers.DataView;
             ArrayBufferIO.setFloat64_BE(buffer, byteOffset, value);
         }
 
-    } //DataViewBE
+    }
 
 #end //!js

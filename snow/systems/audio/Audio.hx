@@ -28,7 +28,7 @@ class Audio {
         emitter = new Emitter();
         active = module.active;
 
-    } //new
+    }
 
 //Public API
 
@@ -37,21 +37,21 @@ class Audio {
     
         emitter.on(_event, _handler);
     
-    } //on
+    }
     
     @:generic
     public function off<T>(_event:AudioEvent, _handler:T->Void) : Bool {
     
         return emitter.off(_event, _handler);
     
-    } //off
+    }
         
     @:generic
     public function emit<T>(_event:AudioEvent, _data:T) : Void {
     
         emitter.emit(_event, _data);
     
-    } //emit
+    }
     
     public function play(_source:AudioSource, ?_volume:Float=1.0, ?_paused:Bool=false) : AudioHandle {
 
@@ -63,7 +63,7 @@ class Audio {
 
         return module.play(_source, _volume, _paused);
 
-    } //play
+    }
 
         /** play and loop a sound source, indefinitely. Use stop to end it. */
     public function loop(_source:AudioSource, ?_volume:Float=1.0, ?_paused:Bool=false) : AudioHandle {
@@ -76,76 +76,76 @@ class Audio {
 
         return module.loop(_source, _volume, _paused);
 
-    } //loop
+    }
 
     public function pause(_handle:AudioHandle) : Void {
         if(!active || _handle == null) return;
         module.pause(_handle);
-    } //pause
+    }
 
     public function unpause(_handle:AudioHandle) : Void {
         if(!active || _handle == null) return;
         module.unpause(_handle);
-    } //unpause
+    }
 
     public function stop(_handle:AudioHandle) : Void {
         if(!active || _handle == null) return;
         module.stop(_handle);
-    } //stop
+    }
 
     public function volume(_handle:AudioHandle, _volume:Float) : Void {
         if(!active || _handle == null) return;
         module.volume(_handle, _volume);
-    } //volume
+    }
 
     public function pan(_handle:AudioHandle, _pan:Float) : Void {
         if(!active || _handle == null) return;
         module.pan(_handle, _pan);
-    } //pan
+    }
 
     public function pitch(_handle:AudioHandle, _pitch:Float) : Void {
         if(!active || _handle == null) return;
         module.pitch(_handle, _pitch);
-    } //pitch
+    }
 
     public function position(_handle:AudioHandle, _position:Float) : Void {
         if(!active || _handle == null) return;
         module.position(_handle, _position);
-    } //position
+    }
 
     public function state_of(_handle:AudioHandle) : AudioState {
         return module.state_of(_handle);
-    } //state_of
+    }
 
     public function loop_of(_handle:AudioHandle) : Bool {
         assert(active, 'audio is suspended, queries are invalid');
         return module.loop_of(_handle);
-    } //loop_of
+    }
 
     public function instance_of(_handle:AudioHandle) : AudioInstance {
         assert(active, 'audio is suspended, queries are invalid');
         return module.instance_of(_handle); 
-    } //instance_of
+    }
 
     public function volume_of(_handle:AudioHandle) : Float {
         assert(active, 'audio is suspended, queries are invalid');
         return module.volume_of(_handle); 
-    } //volume_of
+    }
 
     public function pan_of(_handle:AudioHandle) : Float {
         assert(active, 'audio is suspended, queries are invalid');
         return module.pan_of(_handle); 
-    } //pan_of
+    }
 
     public function pitch_of(_handle:AudioHandle) : Float {
         assert(active, 'audio is suspended, queries are invalid');
         return module.pitch_of(_handle); 
-    } //pitch_of
+    }
 
     public function position_of(_handle:AudioHandle) : Float {
         assert(active, 'audio is suspended, queries are invalid');
         return module.position_of(_handle); 
-    } //position_of
+    }
 
     public function suspend() : Void {
 
@@ -157,7 +157,7 @@ class Audio {
         active = false;
         module.suspend();
 
-    } //suspend
+    }
 
     public function resume() : Void {
 
@@ -169,7 +169,7 @@ class Audio {
         active = true;
         module.resume();
 
-    } //resume
+    }
 
 //Internal
 
@@ -192,7 +192,7 @@ class Audio {
             }
         }
 
-    } //onevent
+    }
 
         /** Called by Snow, cleans up sounds/system */
     function shutdown() {
@@ -200,6 +200,6 @@ class Audio {
         active = false;
         module.shutdown();
 
-    } //shutdown
+    }
 
-} //Audio
+}

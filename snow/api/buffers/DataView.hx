@@ -96,7 +96,7 @@ package snow.api.buffers;
             this.setFloat64(byteOffset, value, true);
         }
 
-    } //DataView
+    }
 
 #else
 
@@ -217,6 +217,6 @@ package snow.api.buffers;
         }
 
 
-    } //DataView
+    }
 
 #end //!js

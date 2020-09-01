@@ -74,7 +74,7 @@ class Promise {
             Promises.defer(Promises.next);
         });
 
-    } //new
+    }
 
         /** The then function returns a Promise. It takes two arguments,
             both are callback functions for the success and failure cases of the Promise. */
@@ -98,9 +98,9 @@ class Promise {
                 return Promise.reject(result);
             }
 
-        } //switch
+        }
 
-    } //then
+    }
 
         /** The error function returns a Promise and deals with rejected cases only.
             It behaves the same as calling then(null, on_rejected).*/
@@ -122,9 +122,9 @@ class Promise {
                 return Promise.reject(result);
             }
 
-        } //switch
+        }
 
-    } //error
+    }
 
         /** The Promise.all(iterable) function returns a promise that
             resolves when all of the promises in the iterable argument
@@ -161,7 +161,7 @@ class Promise {
                     ok(fulfill_result);
                 }
 
-            } //single_ok
+            }
 
             var single_err = function(val) {
 
@@ -171,7 +171,7 @@ class Promise {
                 reject_result = val;
                 no(reject_result);
 
-            } //single_err
+            }
 
             var index = 0;
             for(promise in list) {
@@ -181,7 +181,7 @@ class Promise {
 
         }); //promise
 
-    } //all
+    }
 
         /** The Promise.race function returns a promise that
             resolves or rejects as soon as one of the promises in the
@@ -208,7 +208,7 @@ class Promise {
             }
         });
 
-    } //race
+    }
 
         /** The Promise.reject function returns a Promise object
             that is rejected with the optional reason. */
@@ -218,7 +218,7 @@ class Promise {
             no(reason);
         });
 
-    } //reject
+    }
 
         /** The static Promise.resolve function returns a Promise object
             that is resolved with the given value. */
@@ -228,7 +228,7 @@ class Promise {
             ok(val);
         });
 
-    } //resolve
+    }
 
 //Debug
 
@@ -249,7 +249,7 @@ class Promise {
             Promises.defer(f,result);
         }
 
-    } //add_settle
+    }
 
         /** internal: Return a new linked promise that
             will wait on this, and settle it with this result */
@@ -343,7 +343,7 @@ class Promise {
 
         onsettle();
 
-    } //onfulfill
+    }
 
         /** internal: Called if the promise is rejected. */
     function onreject<T>( reason:T ) {
@@ -360,7 +360,7 @@ class Promise {
 
         onsettle();
 
-    } //onreject
+    }
 
         /** internal: Called when the promise is settled. */
     function onsettle() {
@@ -370,7 +370,7 @@ class Promise {
             fn(result);
         }
 
-    } //onsettle
+    }
 
         /** internal: Handle exceptions in the promise callback.
             This causes a rejection, and if no handlers are found will throw */
@@ -396,7 +396,7 @@ class Promise {
             onreject(err);
         }
 
-    } //onexception
+    }
 
         /** internal: return a string for our state */
     function state_string() {
@@ -407,7 +407,7 @@ class Promise {
         }
     }
 
-} //Promise
+}
 
 
 /**
@@ -449,7 +449,7 @@ class Promises {
         calls.push(f);
     } //
 
-} //Promises
+}
 
 //Promise types
 

@@ -17,7 +17,7 @@ class Main extends snow.App {
 
         return config;
 
-    } //config
+    }
 
     override function ready() {
 
@@ -33,7 +33,7 @@ class Main extends snow.App {
         snow.api.Promise.all(list)
             .then(sound_loaded).error(function(e) log('Error loading sounds: '+ e));
 
-    } //ready
+    }
 
     var wind : AudioSource;
     var sound_wav : AudioSource;
@@ -66,7 +66,7 @@ class Main extends snow.App {
             trace('audio ended: $_handle');
         }); //_handle
 
-    } //sound_loaded
+    }
 
     override function onmousemove(x:Int, y:Int, _, _, _, _) {
 
@@ -99,7 +99,7 @@ class Main extends snow.App {
             trace('played sound ogg with handle: $_handle');
         }
 
-    } //onmouseup
+    }
 
     var s = false;
     var p = false;
@@ -160,7 +160,7 @@ class Main extends snow.App {
             app.shutdown();
         }
 
-    } //onkeyup
+    }
 
     override function tick( delta:Float ) {
 
@@ -169,4 +169,4 @@ class Main extends snow.App {
 
     } //
 
-} //Main
+}

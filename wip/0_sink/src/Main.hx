@@ -55,7 +55,7 @@ class Main extends snow.App.AppFixedTimestep {
 
         return config;
 
-    } //config
+    }
 
     override function onevent( _event:SystemEvent ) {
 
@@ -64,7 +64,7 @@ class Main extends snow.App.AppFixedTimestep {
             log('File event type:${type}, path:${_event.file.path} ts:${_event.file.timestamp}');
         }
 
-    } //on_event
+    }
 
     override function ready() {
 
@@ -175,7 +175,7 @@ class Main extends snow.App.AppFixedTimestep {
             #end
         }
 
-    } //ready
+    }
 
         //default is true in config
     var vsync = true;
@@ -300,7 +300,7 @@ class Main extends snow.App.AppFixedTimestep {
             app.audio.play('wav');
         }
 
-    } //onkeydown
+    }
 
     override function onkeyup( keycode:Int, scancode:Int,_, mod:ModState, _,_ ) {
 
@@ -325,7 +325,7 @@ class Main extends snow.App.AppFixedTimestep {
             log("no clamp: " + noclamp);
         }
 
-    } //onkeyup
+    }
 
     var noclamp : Bool = false;
 
@@ -333,7 +333,7 @@ class Main extends snow.App.AppFixedTimestep {
 
         // log('text event; text:$text / start: $start / length: $length / type:$type / timestamp:${timestamp} / window: ${window_id}');
 
-    } //ontextinput
+    }
 
     override function ontouchdown( x:Float, y:Float, touch_id:Int, timestamp:Float ) {
         // log('touch down; $x / $y / $touch_id / $timestamp');
@@ -368,7 +368,7 @@ class Main extends snow.App.AppFixedTimestep {
             // }
         }
 
-    } //ontouchmove
+    }
 
     override function onmousemove( x:Int, y:Int, xrel:Int, yrel:Int, timestamp:Float, window_id:Int ) {
 
@@ -380,7 +380,7 @@ class Main extends snow.App.AppFixedTimestep {
             phys_posx = positionX;
         }
 
-    } //onmousemove
+    }
 
     override function onmouseup( x:Int, y:Int, button:Int, timestamp:Float, window_id:Int ) {
 
@@ -392,15 +392,15 @@ class Main extends snow.App.AppFixedTimestep {
             phys_posx = positionX;
         #end
 
-    } //onmouseup
+    }
 
     override function onmousedown( x:Int, y:Int, button:Int, timestamp:Float, window_id:Int ) {
         // log('mouse down $x $y $button $timestamp $window_id');
-    } //onmousedown
+    }
 
     override function onmousewheel(  x:Int, y:Int, timestamp:Float, window_id:Int ) {
         // log('mouse wheel $x $y $timestamp $window_id');
-    } //onmousewheel
+    }
 
 
     override function ongamepadaxis( gamepad:Int, axis:Int, value:Float, timestamp:Float ) {
@@ -410,19 +410,19 @@ class Main extends snow.App.AppFixedTimestep {
                 positionY += value * 2 * speed * delta_time;
             }
         }
-    } //ongamepadaxis
+    }
 
     override function ongamepadup( gamepad:Int, button:Int, value:Float, timestamp:Float ) {
         log('button up; device: ${gamepad}, button: ${button} value: ${value} timestamp:  ${timestamp}');
-    } //ongamepadbuttonup
+    }
 
     override function ongamepaddown( gamepad:Int, button:Int, value:Float, timestamp:Float ) {
         log('button down; device: ${gamepad}, button: ${button} value: ${value} timestamp:  ${timestamp}');
-    } //ongamepadbuttondown
+    }
 
     override function ongamepaddevice( gamepad:Int, id:String, type:GamepadDeviceEventType, timestamp:Float ) {
         log('device event; device: ${gamepad}, ${id}, type: ${type} timestamp: ${timestamp}');
-    } //ongamepaddevice
+    }
 
 
     var next_tex_tick : Float = 0;
@@ -476,7 +476,7 @@ class Main extends snow.App.AppFixedTimestep {
             log('mid mouse down');
         }
 
-    } //update
+    }
 
 
     function onrender( window:Window ) {
@@ -516,7 +516,7 @@ class Main extends snow.App.AppFixedTimestep {
 
         return texture;
 
-    } //createTexture
+    }
 
     function initializeShaders ():Void {
 
@@ -607,7 +607,7 @@ class Main extends snow.App.AppFixedTimestep {
         modelViewMatrixUniform = GL.getUniformLocation (shaderProgram, "uModelViewMatrix");
         imageUniform = GL.getUniformLocation (shaderProgram, "uImage0");
 
-    } //initializeShaders
+    }
 
     function createBuffers ():Void {
 
@@ -639,7 +639,7 @@ class Main extends snow.App.AppFixedTimestep {
         GL.bufferData(GL.ARRAY_BUFFER, Float32Array.fromArray(texCoords), GL.STATIC_DRAW);
         GL.bindBuffer (GL.ARRAY_BUFFER, null);
 
-    } //createBuffers
+    }
 
     function render(){
 
@@ -678,7 +678,7 @@ class Main extends snow.App.AppFixedTimestep {
         GL.disableVertexAttribArray (texCoordAttribute);
         GL.useProgram (null);
 
-    } //render
+    }
 
 
     function createOrthoMatrix( x0:Float, x1:Float,  y0:Float, y1:Float, zNear:Float, zFar:Float ) : Float32Array {
@@ -694,7 +694,7 @@ class Main extends snow.App.AppFixedTimestep {
             - (x0+x1)*sx,   - (y0+y1)*sy,   - (zNear+zFar)*sz,  1,
         ]);
 
-    } //createOrthoMatrix
+    }
 
     function create2DMatrix( x:Float, y:Float, scale:Float = 1, rotation:Float = 0 ) {
 
@@ -709,6 +709,6 @@ class Main extends snow.App.AppFixedTimestep {
             x,        y,            0,      1
         ]);
 
-    } //create2DMatrix
+    }
 
-} //Main
+}

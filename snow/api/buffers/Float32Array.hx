@@ -75,8 +75,8 @@ package snow.api.buffers;
             return ArrayBufferView.fromView(Float32, _view);
         }
 
-        inline static public function fromBuffer(_buffer:ArrayBuffer, _byteOffset:Int, _byteLength:Int) : Float32Array {
-            return ArrayBufferView.fromBuffer(Float32, _buffer, _byteOffset, _byteLength);
+        inline static public function fromBuffer(_buffer:ArrayBuffer, _byteOffset:Int, _byteLength:Int, ?_view:ArrayBufferView) : Float32Array {
+            return ArrayBufferView.fromBuffer(Float32, _buffer, _byteOffset, _byteLength, _view);
         }
 
     //Public API

@@ -21,4 +21,4 @@ interface Assets {
         /** Create an image info from raw (already decoded) image pixels. */
     function image_info_from_pixels( _id:String, _width:Int, _height:Int, _pixels:Uint8Array, ?_bpp:Int=4 ) : ImageData;
 
-} //Assets
+}

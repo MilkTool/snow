@@ -26,20 +26,20 @@ class IO implements snow.modules.interfaces.IO {
 
         return './';
 
-    } //app_path
+    }
 
     public function app_path_prefs() : String {
 
         return './';
 
-    } //app_path_prefs
+    }
 
     public function url_open( _url:String ) {
 
         //:todo: native io url open
         log('native url_open / $_url');
 
-    } //url_open
+    }
 
     public function data_load( _path:String, ?_options:IODataOptions ) : Promise {
 
@@ -60,7 +60,7 @@ class IO implements snow.modules.interfaces.IO {
 
         });
 
-    } //data_load
+    }
 
     public function data_save( _path:String, _data:Uint8Array, ?_options:IODataOptions ) : Bool {
 
@@ -79,7 +79,7 @@ class IO implements snow.modules.interfaces.IO {
 
         return false;
 
-    } //data_save
+    }
 
     public function string_save_path( ?_slot:Int = 0 ) : String {
 
@@ -88,7 +88,7 @@ class IO implements snow.modules.interfaces.IO {
 
         return haxe.io.Path.normalize(_path);
 
-    } //string_save_path
+    }
 
 //Internal IO module
 
@@ -107,7 +107,7 @@ class IO implements snow.modules.interfaces.IO {
 
         return _result;
 
-    } //string_slot_destroy
+    }
 
     inline function string_slot_save(?_slot:Int=0, _contents:String) : Bool {
 
@@ -116,7 +116,7 @@ class IO implements snow.modules.interfaces.IO {
 
         return data_save(_path, _data);
 
-    } //string_slot_save
+    }
 
     inline function string_slot_load(?_slot:Int=0) : String {
 
@@ -128,7 +128,7 @@ class IO implements snow.modules.interfaces.IO {
 
         return _data.toBytes().toString();
 
-    } //string_slot_load
+    }
 
     inline function string_slot_encode(_string:String) : String {
 
@@ -138,7 +138,7 @@ class IO implements snow.modules.interfaces.IO {
 
         return haxe.crypto.Base64.encode(_bytes);
 
-    } //string_slot_encode
+    }
 
     inline function string_slot_decode(_string:String) : String {
 
@@ -148,7 +148,7 @@ class IO implements snow.modules.interfaces.IO {
 
         return _bytes.toString();
 
-    } //string_slot_decode
+    }
 
 //File handling
 
@@ -157,49 +157,49 @@ class IO implements snow.modules.interfaces.IO {
         log('file_handle in code module does nothing.');
         return null;
 
-    } //file_handle
+    }
 
     public function file_handle_from_mem(mem:ArrayBufferView, size:Int) : FileHandle {
 
         log('file_handle_from_mem in code module does nothing.');
         return null;
 
-    } //file_handle_from_mem
+    }
 
     public function file_read(handle:FileHandle, dest:ArrayBufferView, size:Int, maxnum:Int) : Int {
 
         log('file_read in code module does nothing.');
         return -1;
 
-    } //file_read
+    }
 
     public function file_write(handle:FileHandle, src:ArrayBufferView, size:Int, num:Int) : Int {
 
         log('file_write in code module does nothing.');
         return -1;
 
-    } //file_write
+    }
 
     public function file_seek(handle:FileHandle, offset:Int, whence:Int) : Int {
 
         log('file_seek in code module does nothing.');
         return -1;
 
-    } //file_seek
+    }
 
     public function file_tell(handle:FileHandle) : Int {
 
         log('file_tell in code module does nothing.');
         return -1;
 
-    } //file_tell
+    }
 
     public function file_close(handle:FileHandle) : Int {
 
         log('file_close in code module does nothing.');
         return -1;
 
-    } //file_close
+    }
 
     public function file_size(handle:FileHandle) : UInt {
 
@@ -209,7 +209,7 @@ class IO implements snow.modules.interfaces.IO {
         file_seek(handle, _cur, FileSeek.set);
         return _size;
 
-    } //file_size
+    }
 
 //Internal
 
@@ -231,7 +231,7 @@ class IO implements snow.modules.interfaces.IO {
 
         return _dest;
 
-    } //_data_load
+    }
 
-} //IO
+}
 

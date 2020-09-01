@@ -35,21 +35,21 @@ class Assets {
         app = _app;
         module = new ModuleAssets(app);
 
-    } //new
+    }
 
         /** Shutdown and clean up etc. */
     function shutdown() {
 
         module.shutdown();
 
-    } //shutdown
+    }
 
 
 //Public API
 
         /** Get the asset path for an asset, adjusted by platform, root etc. */
     public inline function path(_id:String) : String
-        return haxe.io.Path.join([root,_id]);
+        return haxe.io.Path.isAbsolute(_id) ? _id : haxe.io.Path.join([root,_id]);
 
         /** Get an asset as an `AssetBytes`, data stored as `Uint8Array`, using the default processor and provider */
     public inline function bytes(_id:String) : Promise
@@ -83,4 +83,4 @@ class Assets {
     public inline function audio_from_bytes(_id:String, _bytes:Uint8Array, _format:AudioFormatType) : Promise
         return AssetAudio.load_from_bytes(this, _id, _bytes, _format);
 
-} //Assets
+}

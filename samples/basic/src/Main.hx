@@ -69,7 +69,7 @@ class Main extends snow.App {
 
         return config;
 
-    } //config
+    }
 
     #if snowhxt var hxt : Snowhxt; #end
 
@@ -96,7 +96,7 @@ class Main extends snow.App {
 
         #if snowhxt hxt = new Snowhxt(); #end
 
-    } //ready
+    }
 
         //"physics" update
     override function update( delta:Float ) {
@@ -105,7 +105,7 @@ class Main extends snow.App {
 
         physical_x += (speed * dir_x * delta);
 
-    } //update
+    }
 
     override function tick(delta:Float) {
         
@@ -113,7 +113,7 @@ class Main extends snow.App {
 
         #if snowhxt hxt.update(); #end
 
-    } //tick
+    }
 
     override public function onevent(event:SystemEvent) {
 
@@ -133,7 +133,7 @@ class Main extends snow.App {
 
         log('text event; text:$text / start: $start / length: $length / type:$type / timestamp:${timestamp} / window: ${window_id}');
 
-    } //ontextinput
+    }
 
         //render update
     function on_render_update() {
@@ -165,7 +165,7 @@ class Main extends snow.App {
 
         draw();
 
-    } //on_render_update
+    }
 
     function draw() {
 
@@ -195,7 +195,7 @@ class Main extends snow.App {
         
         GL.useProgram(null);
 
-    } //draw
+    }
 
 //Input
 
@@ -240,12 +240,12 @@ class Main extends snow.App {
         #if snow_native
             if(keycode == Key.key_v) {
                 vsync = !vsync;
-                sdl.SDL.GL_SetSwapInterval(vsync);
+                sdl.SDL.GL_SetSwapInterval(vsync ? 1 : 0);
                 log('vsync enabled : $vsync');
             }
         #end
 
-    } //onkeyup
+    }
 
     override function ontouchup(x:Float, y:Float, dx:Float, dy:Float, touch_id:Int, timestamp:Float) {
 
@@ -254,7 +254,7 @@ class Main extends snow.App {
         render_x = physical_x = ((window_width*x) - (size/2));
         render_y = (window_height*y) - (size/2);
 
-    } //touchup
+    }
 
     override function ontouchmove( x:Float, y:Float, dx:Float, dy:Float, touch_id:Int, timestamp:Float ) {
             
@@ -263,7 +263,7 @@ class Main extends snow.App {
         render_x = physical_x = ((window_width*x) - (size/2));
         render_y = (window_height*y) - (size/2);
 
-    } //ontouchmove
+    }
 
     override function onmousewheel( x:Float, y:Float, timestamp:Float, window_id:Int ) {
 
@@ -280,7 +280,7 @@ class Main extends snow.App {
             render_y = y - (size/2);
         }
 
-    } //onmousemove
+    }
 
     override function onmouseup( x:Int, y:Int, button:Int, timestamp:Float, window_id:Int ) {
 
@@ -291,7 +291,7 @@ class Main extends snow.App {
             render_y = y - (size/2);
         #end
 
-    } //onmouseup
+    }
 
     override function ongamepadup(gamepad:Int,btn:Int,value:Float,_) {
         log('gamepad up; device: ${gamepad}, btn: ${btn}, value: ${value}');
@@ -314,7 +314,7 @@ class Main extends snow.App {
             }
         }
 
-    } //ongamepadaxis
+    }
 
 
 //Set up
@@ -328,7 +328,7 @@ class Main extends snow.App {
         if(app.config.user.timescale != null)
             timescale = app.config.user.timescale;
 
-    } //apply_config
+    }
 
 
 //GL stuff
@@ -452,7 +452,7 @@ class Main extends snow.App {
         uniform_MP = GL.getUniformLocation(program, "projection");
         uniform_MV = GL.getUniformLocation(program, "modelview");
 
-    } //init_shaders
+    }
 
     function init_buffers() {
 
@@ -478,7 +478,7 @@ class Main extends snow.App {
 
         GL.bindBuffer (GL.ARRAY_BUFFER, null);
 
-    } //init_buffers
+    }
 
 
 //Helpers
@@ -499,7 +499,7 @@ class Main extends snow.App {
 
         return i;
 
-    } //createOrthoMatrix
+    }
 
     function create2DMatrix( ?into:Float32Array, x:Float, y:Float, scale:Float = 1, rotation:Float = 0 ) {
 
@@ -517,6 +517,6 @@ class Main extends snow.App {
 
         return i;
 
-    } //create2DMatrix
+    }
 
-} //Main
+}

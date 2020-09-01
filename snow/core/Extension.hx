@@ -7,4 +7,4 @@ interface Extension {
 
     private function onevent(event:SystemEvent) : Void;
 
-} //Extension
+}

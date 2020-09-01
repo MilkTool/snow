@@ -19,7 +19,7 @@ import haxe.Log;
             fire_at = Snow.timestamp + time;
             running = true;
 
-        } //new
+        }
 
         public static function measure<T>( f : Void -> T, ?pos : PosInfos ) : T {
             var t0 = Snow.timestamp;
@@ -38,7 +38,7 @@ import haxe.Log;
                 running_timers.remove (this);
             }
 
-        } //stop
+        }
 
 
         static function update() {
@@ -50,11 +50,11 @@ import haxe.Log;
                     if(timer.fire_at < now) {
                         timer.fire_at += timer.time;
                         timer.run();
-                    } //now
+                    }
                 }
             } //all timers
 
-        } //update
+        }
 
             //From std/haxe/Timer.hx
         public static function delay( _time:Float, _f:Void -> Void ) {
@@ -67,7 +67,7 @@ import haxe.Log;
 
             return t;
 
-        } //delay
+        }
 
-    } //Timer
+    }
 

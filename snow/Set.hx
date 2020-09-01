@@ -20,13 +20,13 @@ class Set {
                 // Context.warning('ident: $_value', Context.currentPos());
                 snow.types.Config.app_ident = _value;
                 return macro {};
-            } //ident
+            }
 
             macro static function config(_value:String) {
                 // Context.warning('config: $_value', Context.currentPos());
                 snow.types.Config.app_config = _value;
                 return macro {};
-            } //config
+            }
 
             macro static function main(_value:String) {
                 // Context.warning('main: $_value', Context.currentPos());
@@ -77,7 +77,7 @@ class Set {
 
             return macro null;
 
-        } //ext
+        }
 
-} //Set
+}
 

@@ -20,7 +20,7 @@ class AudioDataWAV extends AudioData {
 
         super(_app, _opt);
 
-    } //new
+    }
 
     override public function destroy() {
 
@@ -32,7 +32,7 @@ class AudioDataWAV extends AudioData {
 
         super.destroy();
 
-    } //destroy
+    }
 
     override public function seek(_to:Int) : Bool {
 
@@ -40,7 +40,7 @@ class AudioDataWAV extends AudioData {
 
         return _result == 0;
 
-    } //seek
+    }
 
     override public function portion(_into:Uint8Array, _start:Int, _len:Int, _into_result:Array<Int>) : Array<Int> {
 
@@ -83,9 +83,9 @@ class AudioDataWAV extends AudioData {
 
         return _into_result;
 
-    } //portion
+    }
 
-} //AudioDataWaV
+}
 
 class WAV {
 
@@ -95,7 +95,7 @@ class WAV {
 
         return from_file_handle(app, _handle, _path, _is_stream);
 
-    } //from_file
+    }
 
     public static function from_bytes(app:snow.Snow, _path:String, _bytes:Uint8Array) : AudioData {
 
@@ -103,7 +103,7 @@ class WAV {
 
         return from_file_handle(app, _handle, _path, false);
 
-    } //from_bytes
+    }
 
  //helpers
 
@@ -172,14 +172,14 @@ class WAV {
                 _info.channels = _format.getUInt16(2);
                 _info.rate = _format.getInt32(4);
                 _format = null;
-            } //fmt
+            }
 
             if(_chunk.id == ID_DATA) {
                 _found_data = true;
                 _info.samples = _chunk.data;
                 _info.length = _chunk.data_length;
                 _info.data_offset = _chunk.offset;
-            } //data
+            }
 
             _chunk.data = null;
             _chunk = null;
@@ -188,11 +188,11 @@ class WAV {
             
             if(_limit >= 32) break;
 
-        } //while
+        }
 
         return _info;
 
-    } //from_file_handle
+    }
 
     public static function read_chunk(app:snow.Snow, _handle:FileHandle, _is_stream:Bool) : WavChunk {
 
@@ -236,6 +236,6 @@ class WAV {
             data_length: _chunk_size
         }
 
-    } //read_chunk
+    }
 
-} //WAV
+}

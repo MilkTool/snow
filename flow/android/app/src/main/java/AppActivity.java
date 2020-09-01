@@ -24,5 +24,5 @@ public class AppActivity extends org.snowkit.snow.SnowActivity {
     }
 
 
-} //AppActivity
+}
 

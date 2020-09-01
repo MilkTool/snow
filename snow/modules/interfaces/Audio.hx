@@ -41,4 +41,4 @@ interface Audio {
     function suspend():Void;
     function resume():Void;
 
-} //Audio
+}

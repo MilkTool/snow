@@ -16,7 +16,7 @@ class Main extends snow.App {
 
         return config;
 
-    } //config
+    }
 
     override function ready() {
 
@@ -27,7 +27,7 @@ class Main extends snow.App {
         test_image_assets();
         test_audio_assets();
 
-    } //ready
+    }
 
     override function onkeyup(keycode:Int, _, _, mod:ModState, _, _) {
 
@@ -35,14 +35,14 @@ class Main extends snow.App {
             app.shutdown();
         }
 
-    } //onkeyup
+    }
 
     override function tick(delta:Float) {
 
         GL.clearColor(1.0, 1.0, 1.0, 1.0);
         GL.clear(GL.COLOR_BUFFER_BIT);
 
-    } //update
+    }
 
     function test_image_assets() {
 
@@ -82,7 +82,7 @@ class Main extends snow.App {
             log('`${imgB.id}` (direct from bytes) : ${imgB.width}x${imgB.height}x${imgB.bpp}(${imgB.bpp_source}) [${imgB.pixels.length}]');
         #end
 
-    } //test_image_assets
+    }
 
     function test_audio_assets() {
 
@@ -130,7 +130,7 @@ class Main extends snow.App {
 
         #end
 
-    } //test_audio_assets
+    }
 
 
-} //Main
+}

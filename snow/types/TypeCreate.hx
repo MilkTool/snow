@@ -69,7 +69,7 @@ class TypeCreate {
 
         return null;
 
-    } //build
+    }
 
     macro public static function ext() : Array<Field> {
 
@@ -85,6 +85,6 @@ class TypeCreate {
 
     }
 
-} //TypeCreate
+}
 
 #end

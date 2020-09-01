@@ -44,7 +44,7 @@ import snow.api.buffers.Uint8Array;
             /** */
         var platform_web     = 'web';
 
-    } //Platform
+    }
 
     /** A platform identifier string */
     @:enum abstract OS(String)
@@ -65,7 +65,7 @@ import snow.api.buffers.Uint8Array;
 
         var os_tvos    = 'tvos';
 
-    } //OS
+    }
 
 //Init bound types
 
@@ -130,9 +130,9 @@ import snow.api.buffers.Uint8Array;
                 case at_audio:   'at_audio';
                 case _:          '$this';
             }
-        } //toString
+        }
 
-    } //AssetType
+    }
 
     /** Information about an image file/data */
     typedef ImageDataOptions = {
@@ -154,7 +154,7 @@ import snow.api.buffers.Uint8Array;
             /** image pixel data */
         var pixels : Uint8Array;
 
-    } //ImageDataOptions
+    }
 
     class ImageData {
 
@@ -191,7 +191,7 @@ import snow.api.buffers.Uint8Array;
 
             _options = null;
 
-        } //new
+        }
 
         public function destroy() {
 
@@ -199,11 +199,11 @@ import snow.api.buffers.Uint8Array;
             #if snow_native pixels.buffer = null; #end
             pixels = null;
 
-        } //destroy
+        }
 
         inline function toString() return '{ "ImageData":true, "id":$id, "width":$width, "height":$height, "width_actual":$width_actual, "height_actual":$height_actual, "bpp":$bpp, "bpp_source":$bpp_source }';
 
-    } //ImageData
+    }
 
     /** Options for an IO data query */
     typedef IODataOptions = {
@@ -211,7 +211,7 @@ import snow.api.buffers.Uint8Array;
         /** Whether or not the data should be treated as binary. */
         @:optional var binary:Bool;
 
-    } //IODataOptions
+    }
 
 //Audio types
 
@@ -244,7 +244,7 @@ import snow.api.buffers.Uint8Array;
             }
         }
 
-    } //AudioFormatType
+    }
 
     /**  */
     @:enum abstract AudioEvent(Int)
@@ -264,8 +264,8 @@ import snow.api.buffers.Uint8Array;
                 case ae_destroyed_source:   'ae_destroyed_source';
                 case _:                     '$this';
             }
-        } //toString
-    } //AudioEvent
+        }
+    }
 
     /**  */
     @:enum abstract AudioState(Int)
@@ -288,8 +288,8 @@ import snow.api.buffers.Uint8Array;
                 case as_stopped:    'as_stopped';
                 case _:             '$this';
             }
-        } //toString
-    } //AudioState
+        }
+    }
 
         /** Options for constructing an AudioData instance */
     typedef AudioDataOptions = {
@@ -304,7 +304,7 @@ import snow.api.buffers.Uint8Array;
         @:optional var samples: Uint8Array;
         @:optional var is_stream: Bool;
 
-    } //AudioDataOptions
+    }
 
         /** An audio data object contains information about audio samples or streams, ready to be used.
             `AudioData` objects typically come from the `app.assets.audio` API or `app.audio.module.data_from_path`,
@@ -349,7 +349,7 @@ import snow.api.buffers.Uint8Array;
 
             _options = null;
 
-        } //new
+        }
 
         //Public API, typically populated by subclasses
 
@@ -368,7 +368,7 @@ import snow.api.buffers.Uint8Array;
                 #end
                 samples = null;
 
-            } //destroy
+            }
 
         //Internal implementation details, populated by subclasses
 
@@ -378,7 +378,7 @@ import snow.api.buffers.Uint8Array;
 
             inline function toString() return '{ "AudioData":true, "id":$id, "rate":$rate, "length":$length, "channels":$channels, "format":"$format", "is_stream":$is_stream }';
 
-    } //AudioData
+    }
 
 //App config types
 
@@ -394,7 +394,7 @@ import snow.api.buffers.Uint8Array;
             /** The runtime specific config */
         @:optional var runtime      : RuntimeConfig;
 
-    } //AppConfig
+    }
 
     /** Config specific to the rendering context that would be used when creating windows */
     typedef RenderConfig = {
@@ -435,7 +435,7 @@ import snow.api.buffers.Uint8Array;
             /** WebGL render context specific settings */
         @:optional var webgl : RenderConfigWebGL;
 
-    } //RenderConfig
+    }
 
 
     /** A type of OpenGL context profile to request. see RenderConfigOpenGL for info */
@@ -456,9 +456,9 @@ import snow.api.buffers.Uint8Array;
                 case gles:          'gles';
                 case _:             '$this';
             }
-        } //toString
+        }
 
-    } //OpenGLProfile
+    }
 
     /** Config specific to an OpenGL rendering context.
         Note that these are hints to the system,
@@ -473,7 +473,7 @@ import snow.api.buffers.Uint8Array;
             /** The OpenGL context profile to request */
         @:optional var profile : OpenGLProfile;
 
-    } //RenderConfigOpenGL
+    }
 
     /** Config specific to a WebGL rendering context.
         See: https://www.khronos.org/registry/webgl/specs/latest/1.0/#WEBGLCONTEXTATTRIBUTES */
@@ -532,7 +532,7 @@ import snow.api.buffers.Uint8Array;
                 webgl default: false */
         @:optional var failIfMajorPerformanceCaveat : Bool;
 
-    } //RenderConfigWebGL
+    }
 
     /** Window configuration information for creating windows */
     typedef WindowConfig = {
@@ -565,7 +565,7 @@ import snow.api.buffers.Uint8Array;
                 Higher sleep times (i.e 1/10 or 1/30) use less cpu. default: 1/15 */
         @:optional var background_sleep : Float;
 
-    } //WindowConfig
+    }
 
 //Event types
 
@@ -596,7 +596,7 @@ import snow.api.buffers.Uint8Array;
             return _s;
         }
 
-    } //SystemEvent
+    }
 
     /** A system window event */
     @:allow(snow.Snow)
@@ -625,7 +625,7 @@ import snow.api.buffers.Uint8Array;
 
         inline function toString() return '{ "WindowEvent":true, "type":"$type", "window":$window_id, "x":$x, "y":$y, "time":$timestamp }';
 
-    } //WindowEvent
+    }
 
     @:allow(snow.systems.input.Input)
     class KeyEvent {
@@ -648,7 +648,7 @@ import snow.api.buffers.Uint8Array;
 
         inline function toString() return '{ "KeyEvent":true, "type":"$type", "keycode":$keycode, "scancode":$scancode, "repeat":$repeat, "mod":$mod }';
 
-    } //KeyEvent
+    }
 
     @:allow(snow.systems.input.Input)
     class TextEvent {
@@ -670,7 +670,7 @@ import snow.api.buffers.Uint8Array;
 
         inline function toString() return '{ "TextEvent":true, "type":"$type", "text":"$text", "start":$start, "length":$length }';
 
-    } //TextEvent
+    }
 
     @:allow(snow.systems.input.Input)
     class MouseEvent {
@@ -698,7 +698,7 @@ import snow.api.buffers.Uint8Array;
 
         inline function toString() return '{ "MouseEvent":true, "type":"$type", "x":$x, "y":$y, "button":$button, "x_rel":$x_rel, "y_rel":$y_rel, "wheel_x":$wheel_x, "wheel_y":$wheel_y }';
 
-    } //MouseEvent
+    }
 
     @:allow(snow.systems.input.Input)
     class TouchEvent {
@@ -723,7 +723,7 @@ import snow.api.buffers.Uint8Array;
 
         inline function toString() return '{ "TouchEvent":true, "type":"$type", "touch_id":$touch_id, "x":$x, "y":$y, "dx":$dx, "dy":$dy }';
 
-    } //TouchEvent
+    }
 
     @:allow(snow.systems.input.Input)
     class GamepadEvent {
@@ -747,7 +747,7 @@ import snow.api.buffers.Uint8Array;
             value   = _value;
             type    = ge_axis;
             gamepad = _gamepad;
-        } //set_axis
+        }
 
         inline function set_button(_type:GamepadEventType, _gamepad:Int, _button:Int, _value:Float) {
             axis = null;
@@ -758,7 +758,7 @@ import snow.api.buffers.Uint8Array;
             value   = _value;
             button  = _button;
             gamepad = _gamepad;
-        } //set_button
+        }
 
         inline function set_device(_gamepad:Int, _id:String, _event:GamepadDeviceEventType) {
             axis = null;
@@ -769,11 +769,11 @@ import snow.api.buffers.Uint8Array;
             device_event = _event;
             gamepad      = _gamepad;
             type         = ge_device;
-        } //set_device
+        }
 
         inline function toString() return '{ "GamepadEvent":true, "type":"$type", "gamepad":$gamepad, "axis":$axis, "button":$button, "value":$value, "device_id":"$device_id", "device_event":"$device_event" }';
 
-    } //GamepadEvent
+    }
 
     @:allow(snow.systems.input.Input)
     class InputEvent {
@@ -808,32 +808,32 @@ import snow.api.buffers.Uint8Array;
             window_id = _window_id;
             timestamp = _timestamp;
 
-        } //reset
+        }
 
         inline function set_key(_event:KeyEvent, _window_id:Int, _timestamp:Float) {
             reset(ie_key, _window_id, _timestamp);
             key = _event;
-        } //set_key
+        }
 
         inline function set_text(_event:TextEvent, _window_id:Int, _timestamp:Float) {
             reset(ie_text, _window_id, _timestamp);
             text = _event;
-        } //set_text
+        }
 
         inline function set_mouse(_event:MouseEvent, _window_id:Int, _timestamp:Float) {
             reset(ie_mouse, _window_id, _timestamp);
             mouse = _event;
-        } //set_mouse
+        }
 
         inline function set_touch(_event:TouchEvent, _timestamp:Float) {
             reset(ie_touch, 0, _timestamp);
             touch = _event;
-        } //set_touch
+        }
 
         inline function set_gamepad(_event:GamepadEvent, _timestamp:Float) {
             reset(ie_gamepad, 0, _timestamp);
             gamepad = _event;
-        } //set_gamepad
+        }
 
         inline function toString() {
             var _s = '{ "InputEvent":true, "type":"$type"';
@@ -849,7 +849,7 @@ import snow.api.buffers.Uint8Array;
             return _s;
         }
 
-    } //InputEvent
+    }
 
     /** Input modifier state */
     @:publicFields
@@ -917,9 +917,9 @@ import snow.api.buffers.Uint8Array;
 
             return _s;
 
-        } //toString
+        }
 
-    } //ModState
+    }
 
 //Event Type enums
 
@@ -941,8 +941,8 @@ import snow.api.buffers.Uint8Array;
                 case ke_up:      'ke_up';
                 case _:          '$this';
             }
-        } //toString
-    } //KeyEventType
+        }
+    }
 
     /** A mouse specific event event type */
     @:enum abstract MouseEventType(Int)
@@ -968,8 +968,8 @@ import snow.api.buffers.Uint8Array;
                 case me_wheel:      'me_wheel';
                 case _:             '$this';
             }
-        } //toString
-    } //MouseEventType
+        }
+    }
 
     /** A touch specific event event type */
     @:enum abstract TouchEventType(Int)
@@ -992,8 +992,8 @@ import snow.api.buffers.Uint8Array;
                 case te_up:         'te_up';
                 case _:             '$this';
             }
-        } //toString
-    } //TouchEventType
+        }
+    }
 
     /** A touch specific event event type */
     @:enum abstract GamepadEventType(Int)
@@ -1019,8 +1019,8 @@ import snow.api.buffers.Uint8Array;
                 case ge_device:     'ge_device';
                 case _:             '$this';
             }
-        } //toString
-    } //GamepadEventType
+        }
+    }
 
     /** A text specific event event type */
     @:enum abstract TextEventType(Int)
@@ -1040,8 +1040,8 @@ import snow.api.buffers.Uint8Array;
                 case te_input:   'te_input';
                 case _:          '$this';
             }
-        } //toString
-    } //TextEventType
+        }
+    }
 
     /** A gamepad device event type */
     @:enum abstract GamepadDeviceEventType(Int)
@@ -1064,8 +1064,8 @@ import snow.api.buffers.Uint8Array;
                 case ge_device_remapped: 'ge_device_remapped';
                 case _:                  '$this';
             }
-        } //toString
-    } //GamepadDeviceEventType
+        }
+    }
 
     @:enum abstract SystemEventType(Int)
         from Int to Int {
@@ -1129,8 +1129,8 @@ import snow.api.buffers.Uint8Array;
                 case se_app_didenterforeground:     'se_app_didenterforeground';
                 case _:                             '$this';
             }
-        } //toString
-    } //SystemEventType
+        }
+    }
 
     @:enum abstract WindowEventType(Int)
         from Int to Int {
@@ -1185,8 +1185,8 @@ import snow.api.buffers.Uint8Array;
                 case we_close:         'we_close';
                 case _:                '$this';
             }
-        } //toString
-    } //WindowEventType
+        }
+    }
 
     @:enum abstract InputEventType(Int)
         from Int to Int {
@@ -1217,5 +1217,5 @@ import snow.api.buffers.Uint8Array;
                 case ie_joystick:      'ie_joystick';
                 case _:                '$this';
             }
-        } //toString
-    } //InputEventType
+        }
+    }

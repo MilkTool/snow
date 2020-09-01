@@ -29,7 +29,7 @@ class Emitter<ET:Int> {
 
         bindings = new IntMap<HandlerList>();
 
-    } //new
+    }
 
         /** Emit a named event */
     public function emit<T>( event:ET, ?data:T #if debug, ?pos:haxe.PosInfos #end ) {
@@ -48,7 +48,7 @@ class Emitter<ET:Int> {
             //might disconnect listeners
         _check();
 
-    } //emit
+    }
 
         /** connect a named event to a handler */
     public function on<T>(event:ET, handler: T->Void #if debug, ?pos:haxe.PosInfos #end ) {
@@ -70,7 +70,7 @@ class Emitter<ET:Int> {
             }
         }
 
-    } //on
+    }
 
         /** disconnect a named event and handler. returns true on success, or false if event or handler not found */
     public function off<T>(event:ET, handler: T->Void #if debug, ?pos:haxe.PosInfos #end ) : Bool {
@@ -98,7 +98,7 @@ class Emitter<ET:Int> {
 
         return success;
 
-    } //off
+    }
 
     var _checking = false;
 
@@ -131,6 +131,6 @@ class Emitter<ET:Int> {
 
         _checking = false;
 
-    } //_check
+    }
 
-} //Emitter
+}

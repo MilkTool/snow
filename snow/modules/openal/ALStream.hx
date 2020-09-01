@@ -27,7 +27,7 @@ class ALStream extends ALSound {
         
         duration = source.duration();
 
-    } //new
+    }
 
     override function init() {
 
@@ -43,7 +43,7 @@ class ALStream extends ALSound {
 
         init_queue();
 
-    } //init
+    }
 
 //ALSound
 
@@ -74,13 +74,13 @@ class ALStream extends ALSound {
         buffer_data.buffer = null;
         buffer_data = null;
 
-    } //destroy
+    }
 
     override function position_of() {
 
         return current_time + AL.getSourcef(alsource, AL.SEC_OFFSET);
 
-    } //position_of
+    }
 
     override function position(_time:Float) : Void {
 
@@ -107,7 +107,7 @@ class ALStream extends ALSound {
             AL.sourcePlay(alsource);
         }
 
-    } //position
+    }
 
 //Internal
 
@@ -147,7 +147,7 @@ class ALStream extends ALSound {
 
         buffers_left = source.stream_buffer_count;
 
-    } //init_queue
+    }
 
     function flush_queue() {
 
@@ -161,7 +161,7 @@ class ALStream extends ALSound {
 
         err('flush_queue');
 
-    } //flush_queue
+    }
 
         //returns the result of the data request, which may not get any data,
         //and which may have reached the end of the data source itself.
@@ -183,7 +183,7 @@ class ALStream extends ALSound {
 
         return data_get_result;
 
-    } //fill_buffer
+    }
     
 //ALStream
 
@@ -269,7 +269,7 @@ class ALStream extends ALSound {
                 
                 } //!looping
 
-            } //_data_ended
+            }
 
             if(!skip_queue) {
                 AL.sourceQueueBuffer(alsource, _buffer);
@@ -278,13 +278,13 @@ class ALStream extends ALSound {
 
             processed_buffers--;
 
-        } //while
+        }
 
         if(!still_streaming) {
             AL.sourceStop(alsource);
         }
 
-    } //tick
+    }
 
 
 }

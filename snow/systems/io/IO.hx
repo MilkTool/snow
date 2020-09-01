@@ -23,28 +23,28 @@ class IO {
     function new( _app:snow.Snow ) {
 
         app = _app;
-        module = new ModuleIO(app);
+        module = @:privateAccess new ModuleIO(app);
 
-    } //new
+    }
 
     public inline function app_path() : String {
 
         return module.app_path();
 
-    } //app_path
+    }
 
     public inline function app_path_prefs() : String {
 
         return module.app_path_prefs();
 
-    } //app_path_prefs
+    }
 
         /** Call this to open a url in the default browser */
     public inline function url_open( _url:String ) {
 
         module.url_open(_url);
 
-    } //url_open
+    }
 
         /** Load bytes from the file path/url given.
             On web a request is sent for the data */
@@ -52,7 +52,7 @@ class IO {
 
         return module.data_load( _path, _options );
 
-    } //data_load
+    }
 
 
         /** Save bytes to the file path/url given.
@@ -61,7 +61,7 @@ class IO {
 
         return module.data_save( _path, _data, _options );
 
-    } //data_save
+    }
 
         /** Returns a promise for data, optionally provided by the given provider, and optionally processed by the given processor. */
     public function data_flow<T>( _id:String, ?_processor:Snow->String->T->Promise, ?_provider:Snow->String->Promise ) : Promise {
@@ -84,7 +84,7 @@ class IO {
 
         }); //promise
 
-    } //data_flow
+    }
 
         /** The string slot <-> key:value pairs,
             for the string sync API. */
@@ -97,7 +97,7 @@ class IO {
 
         return module.string_save_path(_slot);
 
-    } //string_save_path
+    }
 
         /** Save a string value by key, with an optional slot.
             To remove a saved key, pass value in as null.
@@ -133,7 +133,7 @@ class IO {
 
         return module.string_slot_save(_slot, _contents);
 
-    } //string_save
+    }
 
         /** Load a string value by key, with an optional slot.
             Works on all targets as a simple save/load mechanism.
@@ -153,7 +153,7 @@ class IO {
 
         return module.string_slot_decode(_encoded_value);
 
-    } //string_load
+    }
 
         /** Destroy a specific string slot, removing all values stored.
             Does not ask for confirmation. Returns true if successful, false otherwise. */
@@ -167,7 +167,7 @@ class IO {
 
         return module.string_slot_destroy(_slot);
 
-    } //string_destroy
+    }
 
 //Internal string load/save
 
@@ -200,7 +200,7 @@ class IO {
 
         return _string_map;
 
-    } //string_slots_sync
+    }
 
 //Internal
 
@@ -212,14 +212,14 @@ class IO {
 
         module.onevent( _event );
 
-    } //onevent
+    }
 
         /** Destroy and clean up etc. */
     function shutdown() {
 
         module.shutdown();
 
-    } //shutdown
+    }
 
 
-} //IO
+}

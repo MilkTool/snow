@@ -69,7 +69,7 @@ class ArrayBufferIO {
 
             untyped __global__.__hxcpp_memory_set_i16(buffer, byteOffset, value);
 
-        } //setInt16_BE
+        }
 
         #if !snow_no_inline_buffers @:extern inline #end
         public static function getUint16( buffer:ArrayBuffer, byteOffset:Int ) : UINT {
@@ -224,7 +224,7 @@ class ArrayBufferIO {
         _out = _out > 255 ? 255 : _out;
         return _out < 0 ? 0 : _out;
 
-    } //_clamp
+    }
 
 }
 

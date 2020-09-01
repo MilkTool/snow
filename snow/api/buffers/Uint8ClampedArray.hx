@@ -52,7 +52,7 @@ package snow.api.buffers;
             var _out = Std.int(_in);
             _out = _out > 255 ? 255 : _out;
             return _out < 0 ? 0 : _out;
-        } //_clamp
+        }
 
     }
 

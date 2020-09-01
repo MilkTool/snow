@@ -101,7 +101,7 @@ class Audio {
 
         return as_playing;
 
-    } //state
+    }
 
 
     function volume(_handle:AudioHandle, _volume:Float) : Void {

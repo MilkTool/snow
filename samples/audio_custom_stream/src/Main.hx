@@ -20,7 +20,7 @@ class Main extends snow.App {
         config.window.title = 'snow / samples / audio custom stream';
         return config;
 
-    } //config
+    }
 
     override function ready() {
 
@@ -34,7 +34,7 @@ class Main extends snow.App {
 
         trace('oooh handle: $handle');
 
-    } //ready
+    }
 
     override function onmousemove(x:Int, y:Int, _, _, _, _) {
 
@@ -58,7 +58,7 @@ class Main extends snow.App {
             app.shutdown();
         }
 
-    } //onkeyup
+    }
 
     override function tick( delta:Float ) {
 
@@ -67,4 +67,4 @@ class Main extends snow.App {
 
     } //
 
-} //Main
+}

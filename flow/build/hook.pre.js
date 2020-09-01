@@ -32,7 +32,7 @@ exports.hook = function(flow, done) {
 
     done();
 
-} //hook
+}
 
 //https://github.com/jprichardson/node-fs-extra/tree/master/lib/mkdirs
 var _0777 = parseInt('0777', 8);
@@ -64,7 +64,7 @@ desktop.mkdir = function mkdir_sync(_path, _made) {
 
     return _made;
 
-} //mkdir
+}
 
 desktop.copy_openal = function(flow) {
 
@@ -110,7 +110,7 @@ desktop.copy_openal = function(flow) {
 
     return true;
 
-} //copy_openal
+}
 
 desktop.mac = function(flow, done, generate) {
 
@@ -160,7 +160,7 @@ mobile.ios = function(flow, done, force_generate) {
         done();
     }
 
-} //ios
+}
 
 mobile.android = function(flow, done, force_generate) {
 

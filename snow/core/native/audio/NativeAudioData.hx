@@ -36,7 +36,7 @@ class NativeAudioData {
 
             }); //promise
 
-        } //data_from_load
+        }
 
             /** Promises an AudioData instance from the given bytes */            
         public static function data_from_bytes(app:snow.Snow, _id:String, _bytes:Uint8Array, ?_format:AudioFormatType) : Promise {
@@ -56,7 +56,7 @@ class NativeAudioData {
 
             }); //promise
 
-        } //data_from_bytes
+        }
 
     //Direct implementation (without the Promise wrapper)
 
@@ -76,7 +76,7 @@ class NativeAudioData {
 
             return _info;
 
-        } //data_from_load_direct
+        }
 
             /** Returns an AudioData instance from the given bytes */            
         public static function data_from_bytes_direct(app:snow.Snow, _id:String, _bytes:Uint8Array, ?_format:AudioFormatType) : AudioData {
@@ -95,7 +95,7 @@ class NativeAudioData {
 
             return _info;
 
-        } //data_from_bytes
+        }
 
 
-} //NativeAudioData
+}

@@ -22,13 +22,13 @@ class OoohSource extends AudioSource {
             //make sure enough buffers
         stream_buffer_count = 8;
 
-    } //new
+    }
 
     override function instance(_handle:AudioHandle) : AudioInstance {
         return new Oooh(this, _handle);
     }
 
-} //OoohSource
+}
 
 class Oooh extends AudioInstance {
     

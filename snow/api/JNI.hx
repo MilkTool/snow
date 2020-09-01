@@ -73,7 +73,7 @@ class JNI {
 
         return fields;
 
-    } //native
+    }
 
         /** declare a Haxe class extern to a Java class.
             The class must have only static functions without a body.
@@ -87,7 +87,7 @@ class JNI {
                 class PlayAchievements {
                     public static function isSignedIn() : Bool;
                     public static function achievementUnlock(id:String): Void;
-                } //PlayAchievements
+                }
             In user code:
                 var ok = PlayAchievements.isSignedIn();
             */
@@ -160,7 +160,7 @@ class JNI {
             } //each field
 
         return fields;
-    } //declare
+    }
 
     static function cppjni_path( cls:String ) {
         cls = StringTools.replace(cls, '.','_');
@@ -172,7 +172,7 @@ class JNI {
         var jni_ret = JNIInfo.cpp_type_from_hx(ret_str);
         return 'JNIEXPORT $jni_ret JNICALL';
 
-    } //cppjni_ret
+    }
 
     static function jni_to_cpp_arg(arg:JArg) {
 
@@ -196,7 +196,7 @@ class JNI {
 
         return { pre:pre, post:post, name:name };
 
-    } //jni_to_cpp_arg
+    }
 
     static function cpp_start_callback() {
        
@@ -207,13 +207,13 @@ class JNI {
 
         return c;
 
-    } //cpp_start_callback
+    }
 
     static function cpp_end_callback() {
        
         return '\t\t::hx::SetTopOfStack((int*)0, true);\n\n';
 
-    } //cpp_end_callback
+    }
 
     static function cppjni_method( hxcls:String, cls:String, func:String, is_static:Bool, ret_str:String, args:Array<JArg> ) {
 
@@ -275,7 +275,7 @@ class JNI {
 
         return 'extern "C" {\n' + func_def + args_list + cppjni_body + '} //extern c\n';
 
-    } //cppjni_method
+    }
 
         //This injects the required c++ to call the JNI function
     static function inject_body( field:Field, fn:haxe.macro.Function, cpp_body:String ) {
@@ -285,7 +285,7 @@ class JNI {
             //add a blank function body
         fn.expr = macro {};
 
-    } //inject_body
+    }
 
     static function get_meta_string_val( metaname:String ) {
 
@@ -310,7 +310,7 @@ class JNI {
 
         return found_meta;
 
-    } //get_meta_string_val
+    }
 
     static function inject_meta(metaname:String, strval:String, before:Bool=true) {
 
@@ -365,12 +365,12 @@ class JNI {
         //         "
         // );
 
-    } //inject_jni_meta
+    }
 
     static function meta_has(meta:String, field:Field) {
         for(m in field.meta) if(m.name == meta) return true;
         return false;
-    } //meta_has
+    }
 
     static function make_meta(name:String, content:String, pos) {
         return {
@@ -378,9 +378,9 @@ class JNI {
             params:[macro $v{content}],
             pos: pos
         }
-    } //make_meta
+    }
 
-} //JNI
+}
 
 typedef JArg = { name:String, type:String, hx_type:String };
 private class JNIInfo {
@@ -466,7 +466,7 @@ private class JNIInfo {
 
         return code;
 
-    } //cpp_get_env
+    }
 
         /** Get the cpp code to call FindClass on the given (jni) class name,
             i.e slash(package.blah.Class) or package/blah/Class */
@@ -478,7 +478,7 @@ private class JNIInfo {
         #end
 
         return code;
-    } //cpp_find_class
+    }
 
         /** Get the cpp code to call GetMethodID/GetStaticMethodID. */
     public static function cpp_get_methodid( func:String, jni_signature:String, is_static:Bool ) {
@@ -495,7 +495,7 @@ private class JNIInfo {
             code += '\t\t}\n\n';
 
         return code;
-    } //cpp_get_methodid
+    }
 
         /** Get the cpp code to get the argument list in the form of arg_name0, arg_name1  */
     public static function cpp_get_arg_list( arg_list:Array<JArg> ) {
@@ -519,7 +519,7 @@ private class JNIInfo {
 
         return jni_arglist;
 
-    } //cpp_get_arg_list
+    }
 
         /** get the cpp argument declarations for jni types, i.e jint arg_name = (jint)hx_int; */
     public static function cpp_get_arg_decl( arg_list:Array<JArg> ) {
@@ -555,7 +555,7 @@ private class JNIInfo {
 
         return { decl:jni_arg_decl, post:jni_post_code };
 
-    } //cpp_get_arg_decl
+    }
 
         /** Get the method body for the given details, pre transform
             class_name = package.blah.Class, func_name = methodname,
@@ -574,7 +574,7 @@ private class JNIInfo {
             //return the function body
         return cpp_body(jni_class, func_name, is_static, arg_list, jni_args, jni_ret );
 
-    } //cpp_method_body
+    }
 
         /** Get the call type i.e CallStaticVoidMethod vs CallVoidMethod, dependent on the ret type. */
     public static function cpp_method_call_type( func:String, is_static:Bool, ret:String ) {
@@ -591,7 +591,7 @@ private class JNIInfo {
 
         return throw 'unknown return type $func / $is_static / $ret ';
 
-    } //cpp_method_call_type
+    }
 
         /** Internal to return the cpp body function code */
     static function cpp_body( cls:String, func:String, is_static:Bool, args:Array<JArg>, jni_args:String, jni_ret:String ) : String {
@@ -634,7 +634,7 @@ private class JNIInfo {
 
         return code;
 
-    } //cpp_body
+    }
 
 
     public static var jni_bool(default, never)   = 'Z';
@@ -657,6 +657,6 @@ private class JNIInfo {
 
     public static var jnic_special_activity(default, never) = 'jactivity';
 
-} //JNIInfo
+}
 
 #end

@@ -19,7 +19,7 @@ class AudioDataOGG extends AudioData {
 
         super(_app, _opt);
 
-    } //new
+    }
 
     override public function destroy() {
 
@@ -33,7 +33,7 @@ class AudioDataOGG extends AudioData {
 
         super.destroy();
 
-    } //destroy
+    }
 
     override public function seek(_to:Int) : Bool {
 
@@ -44,7 +44,7 @@ class AudioDataOGG extends AudioData {
 
         return res == 0;
 
-    } //seek
+    }
 
     override public function portion(_into:Uint8Array, _start:Int, _len:Int, _into_result:Array<Int>) : Array<Int> {
 
@@ -110,7 +110,7 @@ class AudioDataOGG extends AudioData {
                 reading = false;
             }
 
-        } //while
+        }
 
             //we need the buffer length to reflect the real size,
             //just in case it read shorter than requested
@@ -126,9 +126,9 @@ class AudioDataOGG extends AudioData {
 
         return _into_result;
 
-    } //portion
+    }
 
-} //AudioDataOGG
+}
 
 
 @:allow(snow.core.native.assets.Assets)
@@ -142,7 +142,7 @@ class OGG {
 
         return from_file_handle(app, _handle, _path, _is_stream);
 
-    } //from_file
+    }
 
 
     public static function from_bytes(app:snow.Snow, _path:String, _bytes:Uint8Array) : AudioData {
@@ -153,7 +153,7 @@ class OGG {
 
         return from_file_handle(app, _handle, _path, false);
 
-    } //from_bytes
+    }
 
     public static function from_file_handle(app:snow.Snow, _handle:FileHandle, _path:String, _is_stream:Bool) : AudioData {
 
@@ -240,7 +240,7 @@ class OGG {
 
         return _ogg;
 
-    } //from_file_handle
+    }
 
  //helpers
 
@@ -263,7 +263,7 @@ class OGG {
             case OggCode.OV_HOLE: 'OV_HOLE';
             case _:'$_code';
         }
-    } //code
+    }
 
 
 
@@ -289,7 +289,7 @@ class OGG {
 
         return _read;
 
-    } //ogg_read
+    }
 
         //seek function for ogg callbacks
     static function ogg_seek(_ogg:AudioDataOGG, offset:Int, whence:OggWhence):Void {
@@ -304,7 +304,7 @@ class OGG {
 
         _ogg.app.io.module.file_seek(_ogg.handle, offset, _w);
 
-    } //ogg_seek
+    }
 
         //tell function for ogg callbacks
     static function ogg_tell(_ogg:AudioDataOGG):Int {
@@ -315,7 +315,7 @@ class OGG {
 
         return res;
 
-    } //ogg_tell
+    }
 
 
-} //OGG
+}

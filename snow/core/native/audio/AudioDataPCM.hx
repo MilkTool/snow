@@ -15,7 +15,7 @@ class AudioDataPCM extends AudioData {
 
         super(_app, _opt);
 
-    } //new
+    }
 
     override public function destroy() {
 
@@ -29,7 +29,7 @@ class AudioDataPCM extends AudioData {
 
         super.destroy();
 
-    } //destroy
+    }
 
     override public function seek(_to:Int) : Bool {
 
@@ -39,7 +39,7 @@ class AudioDataPCM extends AudioData {
 
         return _result == 0;
 
-    } //seek
+    }
 
     override public function portion(_into:Uint8Array, _start:Int, _len:Int, _into_result:Array<Int>) : Array<Int> {
 
@@ -86,9 +86,9 @@ class AudioDataPCM extends AudioData {
 
         return _into_result;
 
-    } //portion
+    }
 
-} //AudioDataPCM
+}
 
 
 class PCM {
@@ -123,7 +123,7 @@ class PCM {
             rate:       44100
         }); //return
 
-    } //from_file
+    }
 
     public static function from_bytes(app:snow.Snow, _id:String, _bytes:Uint8Array) : AudioData {
 
@@ -137,7 +137,7 @@ class PCM {
             rate:       44100
         }); //return
 
-    } //from_bytes
+    }
 
 
-} //PCM
+}

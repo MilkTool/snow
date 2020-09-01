@@ -38,7 +38,7 @@ class Assets implements snow.modules.interfaces.Assets {
 
         }); //promise
 
-    } //image_info_from_load
+    }
 
     var load_direct_err = 0;
     public function image_info_from_load_direct(_path:String, ?_components:Int = 4) : ImageData {
@@ -64,7 +64,7 @@ class Assets implements snow.modules.interfaces.Assets {
 
         return image_info_from_bytes_direct(_path, _file, _components);
 
-    } //image_info_from_load
+    }
 
     public function image_info_from_bytes(_id:String, _bytes:Uint8Array, ?_components:Int = 4) : Promise {
 
@@ -83,7 +83,7 @@ class Assets implements snow.modules.interfaces.Assets {
 
         }); //promise
 
-    } //image_info_from_bytes
+    }
 
     public function image_info_from_bytes_direct(_id:String, _bytes:Uint8Array, ?_components:Int=4) : ImageData {
 
@@ -109,7 +109,7 @@ class Assets implements snow.modules.interfaces.Assets {
             pixels : Uint8Array.fromBuffer(_info.bytes, 0, _info.bytes.length) //new Uint8Array( _pixel_bytes )
         });
 
-    } //info_from_bytes
+    }
 
     public function image_info_from_pixels(_id:String, _width:Int, _height:Int, _pixels:Uint8Array, ?_bpp:Int=4) : ImageData {
 
@@ -127,8 +127,8 @@ class Assets implements snow.modules.interfaces.Assets {
             pixels : _pixels
         });
 
-    } //image_info_from_pixels
+    }
 
 
-} //Assets
+}
 

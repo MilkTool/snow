@@ -18,14 +18,14 @@ class Main extends snow.App {
 
         return config;
 
-    } //config
+    }
 
 
     override function ready() {
 
         log('ready');
 
-    } //ready
+    }
 
     override function onmousedown(x:Int, y:Int, button:Int, timestamp:Float, window_id:Int) {
 
@@ -64,7 +64,7 @@ class Main extends snow.App {
             app.runtime.window_grab(grab);
         }
 
-    } //onkeyup
+    }
 
     override public function onevent(event:SystemEvent) {
 
@@ -84,6 +84,6 @@ class Main extends snow.App {
         GL.clearColor(r,1.0,1.0,1.0);
         GL.clear(GL.COLOR_BUFFER_BIT);
 
-    } //tick
+    }
 
-} //Main
+}

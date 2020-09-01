@@ -36,7 +36,7 @@ class AudioSource {
 
         instances = [];
 
-    } //new
+    }
 
         /** Called by the audio system to obtain a new instance of this source. */
     public function instance(_handle:AudioHandle) : AudioInstance {
@@ -49,7 +49,7 @@ class AudioSource {
 
         return _instance;
 
-    } //instance
+    }
 
         /** A helper for converting bytes to seconds for a sound source */
     public function bytes_to_seconds(_bytes:Int) : Float {
@@ -59,7 +59,7 @@ class AudioSource {
 
         return _bytes / _sample_frames;
 
-    } //bytes_to_seconds
+    }
 
         /** A helper for converting seconds to bytes for this audio source */
     public function seconds_to_bytes(_seconds:Float) : Int {
@@ -69,14 +69,14 @@ class AudioSource {
 
         return Std.int(_seconds * _sample_frames);
 
-    } //seconds_to_bytes
+    }
 
         //
     public function duration() : Float {
 
         return bytes_to_seconds(data.length);
 
-    } //duration
+    }
 
     public function destroy() {
 
@@ -106,7 +106,7 @@ class AudioSource {
         instances = null;
         app = null;
 
-    } //destroy
+    }
 
     @:allow(snow.systems.audio.AudioInstance)
     function instance_killed(_instance:AudioInstance) {
@@ -115,4 +115,4 @@ class AudioSource {
 
     }
 
-} //AudioSource
+}

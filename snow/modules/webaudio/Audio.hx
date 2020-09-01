@@ -75,24 +75,24 @@ class Audio implements snow.modules.interfaces.Audio {
 
         active = true;
 
-    } //new
+    }
 
     function shutdown():Void {
 
             //:todo: haxe js.html.audio.AudioContext api lacks suspend property
         untyped context.close();
 
-    } //shutdown
+    }
 
     function onevent(event:SystemEvent):Void {
 
-    } //onevent
+    }
 
     inline function snd_of(_handle:AudioHandle) : WebSound {
 
         return instances.get(_handle);
 
-    } //snd_of
+    }
 
     function play_buffer(_data:AudioDataWebAudio) : js.html.audio.AudioBufferSourceNode {
 
@@ -101,7 +101,7 @@ class Audio implements snow.modules.interfaces.Audio {
 
         return _node;
 
-    } //play_buffer
+    }
 
     function play_buffer_again(_handle:AudioHandle, _snd:WebSound, _start_time:Float) {
 
@@ -113,7 +113,7 @@ class Audio implements snow.modules.interfaces.Audio {
         _snd.buffer_node.start(0, _start_time);
         _snd.buffer_node.onended = destroy_snd.bind(_snd);
 
-    } //play_buffer_again
+    }
 
     function play_instance(
         _handle:AudioHandle,
@@ -207,7 +207,7 @@ class Audio implements snow.modules.interfaces.Audio {
 
         return _handle;
 
-    } //play
+    }
 
     public function loop(_source:AudioSource, _volume:Float, _paused:Bool) : AudioHandle {
 
@@ -227,7 +227,7 @@ class Audio implements snow.modules.interfaces.Audio {
 
         return _handle;
 
-    } //loop
+    }
 
     function stop_buffer(_snd:WebSound) {
         _snd.buffer_node.stop();
@@ -253,7 +253,7 @@ class Audio implements snow.modules.interfaces.Audio {
             _snd.media_elem.pause();
         }
 
-    } //pause
+    }
 
     public function unpause(_handle:AudioHandle) : Void {
 
@@ -271,7 +271,7 @@ class Audio implements snow.modules.interfaces.Audio {
 
         _snd.state = as_playing;
 
-    } //unpause
+    }
 
     inline function destroy_snd(_snd:WebSound) {
 
@@ -302,7 +302,7 @@ class Audio implements snow.modules.interfaces.Audio {
         instances.remove(_snd.handle);
         _snd = null;
 
-    } //destroy_snd
+    }
 
     public function stop(_handle:AudioHandle) : Void {
 
@@ -315,7 +315,7 @@ class Audio implements snow.modules.interfaces.Audio {
 
         _snd.state = as_stopped;
 
-    } //stop
+    }
 
 
     public function volume(_handle:AudioHandle, _volume:Float) : Void {
@@ -327,7 +327,7 @@ class Audio implements snow.modules.interfaces.Audio {
 
         _snd.gain_node.gain.value = _volume;
 
-    } //volume
+    }
 
     public function pan(_handle:AudioHandle, _pan:Float) : Void {
 
@@ -339,7 +339,7 @@ class Audio implements snow.modules.interfaces.Audio {
         _snd.pan = _pan;
         _snd.pan_node.setPosition( Math.cos( (_pan-1)*half_pi ),   0,   Math.sin( (_pan+1)*half_pi ) );
 
-    } //pan
+    }
 
     public function pitch(_handle:AudioHandle, _pitch:Float) : Void {
 
@@ -354,7 +354,7 @@ class Audio implements snow.modules.interfaces.Audio {
             _snd.media_elem.playbackRate = _pitch;
         }
 
-    } //pitch
+    }
 
     public function position(_handle:AudioHandle, _time:Float) : Void {
 
@@ -370,7 +370,7 @@ class Audio implements snow.modules.interfaces.Audio {
             _snd.media_elem.currentTime = _time;
         }
 
-    } //position
+    }
 
 
     public function volume_of(_handle:AudioHandle) : Float {
@@ -380,7 +380,7 @@ class Audio implements snow.modules.interfaces.Audio {
 
         return _snd.gain_node.gain.value;
 
-    } //volume_of
+    }
 
     public function pan_of(_handle:AudioHandle) : Float {
 
@@ -389,7 +389,7 @@ class Audio implements snow.modules.interfaces.Audio {
 
         return _snd.pan;
 
-    } //pan_of
+    }
 
     public function pitch_of(_handle:AudioHandle) : Float {
 
@@ -406,7 +406,7 @@ class Audio implements snow.modules.interfaces.Audio {
 
         return _result;
 
-    } //pitch_of
+    }
 
     public function position_of(_handle:AudioHandle) : Float {
 
@@ -417,7 +417,7 @@ class Audio implements snow.modules.interfaces.Audio {
 
         return 0.0;
 
-    } //position_of
+    }
 
     public function state_of(_handle:AudioHandle) : AudioState {
 
@@ -426,7 +426,7 @@ class Audio implements snow.modules.interfaces.Audio {
 
         return _snd.state;
 
-    } //state_of
+    }
 
     public function loop_of(_handle:AudioHandle) : Bool {
 
@@ -435,7 +435,7 @@ class Audio implements snow.modules.interfaces.Audio {
 
         return _snd.loop;
 
-    } //loop_of
+    }
 
     public function instance_of(_handle:AudioHandle) : AudioInstance {
 
@@ -444,7 +444,7 @@ class Audio implements snow.modules.interfaces.Audio {
 
         return _snd.instance;
 
-    } //instance_of
+    }
 
 
     public function suspend():Void {
@@ -452,14 +452,14 @@ class Audio implements snow.modules.interfaces.Audio {
             //:todo: haxe js.html.audio.AudioContext api lacks suspend property
         untyped context.suspend();
 
-    } //suspend
+    }
 
     public function resume():Void {
 
             //:todo: haxe js.html.audio.AudioContext api lacks resume property
         untyped context.resume();
 
-    } //resume
+    }
 
 //Data API
 
@@ -475,7 +475,7 @@ class Audio implements snow.modules.interfaces.Audio {
 
         return data_from_load_sound(_path, _format);
 
-    } //data_from_load
+    }
 
     public function data_from_bytes(_id:String, _bytes:Uint8Array, ?_format:AudioFormatType) : Promise {
 
@@ -487,7 +487,7 @@ class Audio implements snow.modules.interfaces.Audio {
 
         }); //Promise
 
-    } //data_from_bytes
+    }
 
     //Internal helpers
 
@@ -513,7 +513,7 @@ class Audio implements snow.modules.interfaces.Audio {
 
             }); //error
 
-        } //data_from_bytes_direct
+        }
 
         function data_from_load_sound(_path:String, _format:AudioFormatType) {
 
@@ -529,7 +529,7 @@ class Audio implements snow.modules.interfaces.Audio {
 
             }); //Promise
 
-        } //data_from_load_sound
+        }
 
         function data_from_load_stream(_path:String, _format:AudioFormatType) : Promise {
 
@@ -554,7 +554,7 @@ class Audio implements snow.modules.interfaces.Audio {
 
                     return reject('failed to load `$_path` as stream : `$_error`');
 
-                } //onerror
+                }
 
                 _element.onloadedmetadata = function(_) {
 
@@ -580,14 +580,14 @@ class Audio implements snow.modules.interfaces.Audio {
 
                     return resolve(_data);
 
-                } //onloadedmetadata
+                }
 
             }); //promise
 
-        } //data_from_load_stream
+        }
 
 
-} //Audio
+}
 
 private class AudioDataWebAudio extends AudioData {
 
@@ -609,7 +609,7 @@ private class AudioDataWebAudio extends AudioData {
 
         super(_app, _opt);
 
-    } //new
+    }
 
     override public function destroy() {
 
@@ -619,8 +619,8 @@ private class AudioDataWebAudio extends AudioData {
 
         super.destroy();
 
-    } //destroy
+    }
 
-} //AudioDataWebAudio
+}
 
 #end

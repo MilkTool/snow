@@ -21,7 +21,7 @@ class Main extends snow.App {
 
         return config;
 
-    } //config
+    }
 
     override function ready() {
 
@@ -36,6 +36,6 @@ class Main extends snow.App {
 
         app.shutdown();
 
-    } //ready
+    }
 
-} //Main
+}

@@ -31,7 +31,7 @@ class AudioInstance {
 
         return source.app.audio.state_of(handle) == as_stopped;
 
-    } //has_ended
+    }
 
     public function destroy() {
 
@@ -43,7 +43,7 @@ class AudioInstance {
         source = null;
         handle = -1;
 
-    } //destroy
+    }
 
     public function data_get(_into:Uint8Array, _start:Int, _length:Int, _into_result:Array<Int>) : Array<Int> {
 
@@ -51,7 +51,7 @@ class AudioInstance {
 
         return source.data.portion(_into, _start, _length, _into_result);
 
-    } //data_get
+    }
         
     public function data_seek(_to_samples:Int) : Bool {
 
@@ -59,6 +59,6 @@ class AudioInstance {
 
         return source.data.seek(_to_samples);
 
-    } //data_seek
+    }
     
-} //AudioInstance
+}

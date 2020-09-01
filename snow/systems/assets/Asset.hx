@@ -33,14 +33,14 @@ class Asset {
         type = _type;
         id = _id;
 
-    } //new
+    }
 
         /** Implemented by subclasses to clean up their data and references. */
     public function destroy() {
 
     }
 
-} //Asset
+}
 
 
 //Image
@@ -56,7 +56,7 @@ class Asset {
             super(_system, _id, at_image);
             image = _image;
 
-        } //new
+        }
 
         //Public API
 
@@ -78,7 +78,7 @@ class Asset {
 
                 }); //promise
 
-            } //reload
+            }
 
             override public function destroy() {
 
@@ -103,7 +103,7 @@ class Asset {
 
                 });
 
-            } //reload_from_bytes
+            }
 
                 /** Reload the asset from already decoded pixels */
             public function reload_from_pixels(_width:Int, _height:Int, _pixels:Uint8Array) {
@@ -112,7 +112,7 @@ class Asset {
 
                 image = system.module.image_info_from_pixels(id, _width, _height, _pixels);
 
-            } //reload_from_bytes
+            }
 
         //Public Static API
 
@@ -123,7 +123,7 @@ class Asset {
 
                 return new AssetImage(_system, _id, null).reload();
 
-            } //load
+            }
 
             public static function load_from_bytes(_system:Assets, _id:String, _bytes:Uint8Array) : Promise {
 
@@ -133,7 +133,7 @@ class Asset {
 
                 return new AssetImage(_system, _id, null).reload_from_bytes(_bytes);
 
-            } //load_from_bytes
+            }
 
             public static function load_from_pixels(_system:Assets, _id:String, _width:Int, _height:Int, _pixels:Uint8Array) : AssetImage {
 
@@ -145,7 +145,7 @@ class Asset {
 
                 return new AssetImage(_system, _id, info);
 
-            } //load_from_pixels
+            }
 
                 /** A default io provider, using image_info_from_load from the asset module.
                     Promises ImageData. Takes an asset path, not an asset id (use assets.path(id))*/
@@ -153,7 +153,7 @@ class Asset {
 
                 return _app.assets.module.image_info_from_load(_path);
 
-            } //provider
+            }
 
                 /** A convenience io processor, using image_info_from_bytes, from the asset module. Promises ImageData */
             public static function processor(_app:snow.Snow, _id:String, _data:Uint8Array) : Promise {
@@ -162,7 +162,7 @@ class Asset {
 
                 return _app.assets.module.image_info_from_bytes(_id, _data);
 
-            } //load
+            }
 
         //Internal
 
@@ -172,9 +172,9 @@ class Asset {
                 loaded = _image != null;
                 return image = _image;
 
-            } //set_image
+            }
 
-    } //AssetImage
+    }
 
 
 //Audio
@@ -189,7 +189,7 @@ class Asset {
             super(_system, _id, at_audio);
             audio = _audio;
 
-        } //new
+        }
 
         //Public API
 
@@ -211,14 +211,14 @@ class Asset {
 
                 }); //promise
 
-            } //reload
+            }
 
             override public function destroy() {
             
                 audio.destroy();
                 audio = null;
             
-            } //destroy
+            }
 
                 /** Reload the asset from bytes */
             public function reload_from_bytes(_bytes:Uint8Array, _format:AudioFormatType) {
@@ -236,7 +236,7 @@ class Asset {
 
                 });
 
-            } //reload_from_bytes
+            }
 
         //Public Static API
 
@@ -247,7 +247,7 @@ class Asset {
 
                 return new AssetAudio(_system, _id, null).reload(_is_stream);
 
-            } //load
+            }
 
             public static function load_from_bytes(_system:Assets, _id:String, _bytes:Uint8Array, _format:AudioFormatType) : Promise {
 
@@ -257,7 +257,7 @@ class Asset {
 
                 return new AssetAudio(_system, _id, null).reload_from_bytes(_bytes, _format);
 
-            } //load_from_bytes
+            }
 
         //Internal
 
@@ -267,9 +267,9 @@ class Asset {
                 loaded = _audio != null;
                 return audio = _audio;
 
-            } //set_audio
+            }
 
-    } //AssetAudio
+    }
 
 
 //Bytes
@@ -284,7 +284,7 @@ class Asset {
             super(_system, _id, at_bytes);
             bytes = _bytes;
 
-        } //new
+        }
 
         //Public API
 
@@ -302,7 +302,7 @@ class Asset {
 
                 }); //promise
 
-            } //reload
+            }
 
             override public function destroy() {
                 //:note: can't set the buffer on js, this is mostly for cpp gc anyway
@@ -317,7 +317,7 @@ class Asset {
 
                 return new AssetBytes(_system, _id, null).reload();
 
-            } //load
+            }
 
 
         //Internal
@@ -328,9 +328,9 @@ class Asset {
                 loaded = _bytes != null;
                 return bytes = _bytes;
 
-            } //set_bytes
+            }
 
-    } //AssetBytes
+    }
 
 
 //Text
@@ -345,7 +345,7 @@ class Asset {
             super(_system, _id, at_text);
             text = _text;
 
-        } //new
+        }
 
         //Public API
 
@@ -363,7 +363,7 @@ class Asset {
 
                 }); //promise
 
-            } //reload
+            }
 
             override public function destroy() {
                 text = null;
@@ -376,7 +376,7 @@ class Asset {
 
                 return new AssetText(_system, _id, null).reload();
 
-            } //load
+            }
 
                 /** A default text processor for the data processor API */
             public static function processor(_app:snow.Snow, _id:String, _data:Uint8Array) : Promise {
@@ -390,7 +390,7 @@ class Asset {
 
                 return Promise.resolve(_string);
 
-            } //processor
+            }
 
         //Internal
 
@@ -400,9 +400,9 @@ class Asset {
                 loaded = _text != null;
                 return text = _text;
 
-            } //set_text
+            }
 
-    } //AssetText
+    }
 
 //JSON
 
@@ -416,7 +416,7 @@ class Asset {
             super(_system, _id, at_json);
             json = _json;
 
-        } //new
+        }
 
         //Public API
 
@@ -434,7 +434,7 @@ class Asset {
 
                 }); //promise
 
-            } //reload
+            }
 
             override public function destroy() {
                 json = null;
@@ -447,7 +447,7 @@ class Asset {
 
                 return new AssetJSON(_system, _id, null).reload();
 
-            } //load
+            }
 
                 /** A default json processor for the data processor API */
             public static function processor(_app:snow.Snow, _id:String, _data:Uint8Array) : Promise {
@@ -470,7 +470,7 @@ class Asset {
 
                 }); //promise
 
-            } //processor
+            }
 
         //Internal
 
@@ -480,6 +480,6 @@ class Asset {
                 loaded = _json != null;
                 return json = _json;
 
-            } //set_json
+            }
 
-    } //AssetJSON
+    }

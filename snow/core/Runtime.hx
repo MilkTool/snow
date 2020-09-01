@@ -29,4 +29,4 @@ interface Runtime {
         /** Get the height of the render surface of the window (i.e post-device-scale) */
     function window_height() : Int;
 
-} //Runtime
+}

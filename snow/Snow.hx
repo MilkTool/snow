@@ -145,7 +145,7 @@ class Snow {
                 shutdown();
             }
 
-        } //new
+        }
 
             //internal
         var immediate_shutdown = false;
@@ -176,7 +176,7 @@ class Snow {
 
             has_shutdown = true;
 
-        } //shutdown
+        }
 
     //events
 
@@ -187,7 +187,7 @@ class Snow {
 
             onevent(sys_event);
 
-        } //dispatch_event
+        }
 
         //internal
         var window_in_background = false;
@@ -207,7 +207,7 @@ class Snow {
             
             onevent(sys_event);
 
-        } //dispatch_window_event
+        }
 
         @:allow(snow.systems.input.Input)
         function dispatch_input_event(_event:InputEvent) {
@@ -216,7 +216,7 @@ class Snow {
             
             onevent(sys_event);
 
-        } //dispatch_input_event
+        }
 
             /** Handles snow system events, typically emitted via the runtime and modules.
                 Dispatch events manually using the `dispatch_*` calls. */
@@ -254,7 +254,7 @@ class Snow {
 
             } //switch _event.type
 
-        } //onevent
+        }
 
             /** Call a function at the start of the next frame,
                 useful for async calls in a sync context, allowing the sync function to return safely before the onload is fired. */
@@ -263,7 +263,7 @@ class Snow {
 
             if(func != null) next_queue.push(func);
 
-        } //next
+        }
 
             /** Call a function at the end of the current frame */
         inline
@@ -271,7 +271,7 @@ class Snow {
 
             if(func != null) defer_queue.push(func);
 
-        } //defer
+        }
 
     //internal endpoints
 
@@ -307,7 +307,7 @@ class Snow {
 
             step();
 
-        } //on_ready_event
+        }
 
         inline function on_tick_event() {
 
@@ -331,7 +331,7 @@ class Snow {
 
             cycle_defer_queue();
 
-        } //on_tick_event
+        }
 
     //setup and boot
 
@@ -367,7 +367,7 @@ class Snow {
 
             }); //promise
 
-        } //setup_configs
+        }
 
         inline function setup_host_config() {
 
@@ -375,7 +375,7 @@ class Snow {
 
             config = host.config( config );
 
-        } //setup_host_config
+        }
 
             /** Handles the default method of parsing a user config json */
         function default_user_config() : Promise {
@@ -385,6 +385,9 @@ class Snow {
                 //for the default config, we only reject if there is a json parse error
             return new Promise(function(resolve, reject) {
 
+                #if snow_no_user_config
+                resolve(null);
+                #else
                 var load = io.data_flow(assets.path(snow.types.Config.app_config), AssetJSON.processor);
 
                     load.then(resolve).error(function(error:Error) {
@@ -396,10 +399,11 @@ class Snow {
                                 resolve(null);
                         }
                     });
+                #end
 
             }); //promise
 
-        } //default_user_config
+        }
 
         function default_config() : AppConfig {
 
@@ -410,7 +414,7 @@ class Snow {
                 runtime : null
             }
 
-        } //default_config
+        }
 
         /** Returns a default configured render config */
         function default_render_config() : RenderConfig {
@@ -440,7 +444,7 @@ class Snow {
                 }
             };
 
-        } //default_render_config
+        }
 
             /** Returns a default configured window config */
         function default_window_config() : WindowConfig {
@@ -468,7 +472,7 @@ class Snow {
 
             return conf;
 
-        } //default_window_config
+        }
 
     //properties
 
@@ -480,7 +484,7 @@ class Snow {
 
             return freeze;
 
-        } //set_freeze
+        }
 
     //step
 
@@ -496,7 +500,7 @@ class Snow {
                 cycle_defer_queue();
             }
 
-        } //step
+        }
 
     //callbacks
 
@@ -512,7 +516,7 @@ class Snow {
                 ++i;
             }
 
-        } //cycle_next_queue
+        }
 
         inline function cycle_defer_queue() {
 
@@ -523,7 +527,7 @@ class Snow {
                 ++i;
             }
 
-        } //cycle_next_queue
+        }
 
     //helpers
 
@@ -584,7 +588,7 @@ class Snow {
                     if (ascii > 90) ascii += 6;
                     return String.fromCharCode(ascii);
                 } else return Std.string(value).charAt(0);
-            } //to_char
+            }
 
             var r = Std.int(val % 62);
             var q = Std.int(val / 62);
@@ -593,6 +597,6 @@ class Snow {
 
             return Std.string(to_char(r));
 
-        } //make_uniqueid
+        }
 
-} //Snow
+}

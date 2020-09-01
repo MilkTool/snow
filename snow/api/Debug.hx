@@ -32,7 +32,7 @@ class Debug {
 
         return macro null;
 
-    } //level
+    }
 
     macro static function filter( __filter:String ) : haxe.macro.Expr {
 
@@ -46,7 +46,7 @@ class Debug {
 
         return macro null;
 
-    } //filter
+    }
 
     macro static function exclude( __exclude:String ) : haxe.macro.Expr {
 
@@ -60,7 +60,7 @@ class Debug {
 
         return macro null;
 
-    } //exclude
+    }
 
     macro static function width( _width:Int ) : haxe.macro.Expr {
 
@@ -68,7 +68,7 @@ class Debug {
 
         return macro null;
 
-    } //width
+    }
 
         //This macro uses the defined log level value to reject code that
         //shouldn't even exist at runtime , like low level debug information
@@ -104,7 +104,7 @@ class Debug {
 
         return macro null;
 
-    } //log
+    }
 
     macro public static function _debug( value:Dynamic ) : Expr {
 
@@ -137,7 +137,7 @@ class Debug {
 
         return macro null;
 
-    } //_debug
+    }
 
     macro public static function _verbose( value:Dynamic ) : Expr {
 
@@ -170,7 +170,7 @@ class Debug {
 
         return macro null;
 
-    } //_verbose
+    }
 
     macro public static function _verboser( value:Dynamic ) : Expr {
 
@@ -203,7 +203,7 @@ class Debug {
 
         return macro null;
 
-    } //_verboser
+    }
 
     macro public static function assert(expr:Expr, ?reason:ExprOf<String>) {
         #if !snow_no_assertions
@@ -219,7 +219,7 @@ class Debug {
             }
         #end
         return macro null;
-    } //assert
+    }
 
     macro public static function assertnull(value:Expr, ?reason:ExprOf<String>) {
         #if !snow_no_assertions
@@ -234,7 +234,7 @@ class Debug {
             }
         #end
         return macro null;
-    } //assert
+    }
 
     macro public static function def(value:Expr, def:Expr):Expr {
         return macro @:pos(Context.currentPos()) {
@@ -262,7 +262,7 @@ class Debug {
 
         return _spaces;
 
-    } //_get_spacing
+    }
 
 } // Debug
 

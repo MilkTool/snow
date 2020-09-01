@@ -16,13 +16,13 @@ class Main extends snow.App {
 
         return config;
 
-    } //config
+    }
 
     override function ready() {
 
         log('ready');
 
-    } //ready
+    }
 
     override function onkeyup( keycode:Int, _,_, mod:ModState, _,_ ) {
 
@@ -30,13 +30,13 @@ class Main extends snow.App {
             app.shutdown();
         }
 
-    } //onkeyup
+    }
 
     override function tick( delta:Float ) {
 
         GL.clearColor(1.0, 1.0, 1.0, 1.0);
         GL.clear(GL.COLOR_BUFFER_BIT);
 
-    } //update
+    }
 
-} //Main
+}

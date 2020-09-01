@@ -46,7 +46,7 @@ class Runtime implements snow.core.Runtime {
             _debug('init / app path / no change (app path was `$_app_path`)');
         }
 
-    } //new
+    }
 
     function run() : Bool {
 
@@ -56,19 +56,19 @@ class Runtime implements snow.core.Runtime {
 
         return true;
 
-    } //run
+    }
 
     function ready() {
 
         log('runtime / native / ready');
         
-    } //ready
+    }
 
     function shutdown(?_immediate:Bool=false) {
 
         log('runtime / native / shutdown / immediate=$_immediate');
 
-    } //shutdown
+    }
 
     public function window_grab(enable:Bool) : Bool {
 
@@ -76,7 +76,7 @@ class Runtime implements snow.core.Runtime {
 
         return false;
 
-    } //window_grab
+    }
 
     public function window_fullscreen(enable:Bool, ?true_fullscreen:Bool=false) : Bool {
 
@@ -84,7 +84,7 @@ class Runtime implements snow.core.Runtime {
 
         return false;
 
-    } //window_fullscreen
+    }
 
     public function window_device_pixel_ratio() : Float {
 
@@ -92,7 +92,7 @@ class Runtime implements snow.core.Runtime {
 
         return 1.0;
 
-    } //window_device_pixel_ratio
+    }
 
     public function window_width() : Int {
 
@@ -100,7 +100,7 @@ class Runtime implements snow.core.Runtime {
 
         return 0;
 
-    } //window_width
+    }
 
     public function window_height() : Int {
 
@@ -108,15 +108,15 @@ class Runtime implements snow.core.Runtime {
 
         return 0;
 
-    } //window_height
+    }
 
     inline public static function timestamp() : Float {
 
         return haxe.Timer.stamp();
 
-    } //timestamp
+    }
 
-} //Runtime
+}
 
 @:noCompletion typedef RuntimeConfig = {}
 @:noCompletion typedef WindowHandle = Int

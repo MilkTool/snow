@@ -22,10 +22,16 @@ class Runtime extends snow.core.native.Runtime {
     public var window : sdl.Window;
         /** Toggle auto window swap */
     public var auto_swap : Bool = true;
+        /** Current SDL event being handled */
+    public var current_ev : sdl.Event = null;
+        /** Whether the window was hidden at startup */
+    public var window_hidden_at_startup : Bool = false;
         /** internal: map of gamepad index to gamepad instance */
     var gamepads : Map<Int, sdl.GameController>;
         /** internal: map of joystick index to joystick instance */
     var joysticks : Map<Int, sdl.Joystick>;
+
+    public var handle_sdl_event : sdl.Event->Void = null;
 
     function new(_app:snow.Snow) {
 
@@ -33,7 +39,9 @@ class Runtime extends snow.core.native.Runtime {
         timestamp_start = Timestamp.now();
         name = 'sdl';
 
-        app.config.runtime = {}
+        app.config.runtime = {
+            uncaught_error_handler: null
+        };
 
         gamepads = new Map();
         joysticks = new Map();
@@ -89,7 +97,7 @@ class Runtime extends snow.core.native.Runtime {
 
         _debug('sdl / init ok');
 
-    } //new
+    }
 
     override function ready() {
 
@@ -97,7 +105,7 @@ class Runtime extends snow.core.native.Runtime {
 
         _debug('sdl / ready');
 
-    } //ready
+    }
 
     override function run() : Bool {
 
@@ -105,7 +113,7 @@ class Runtime extends snow.core.native.Runtime {
 
         return run_loop();
 
-    } //run
+    }
 
     override function shutdown(?_immediate:Bool=false) {
 
@@ -116,7 +124,7 @@ class Runtime extends snow.core.native.Runtime {
             _debug('sdl / shutdown immediate');
         }
 
-    } //shutdown
+    }
 
     override function window_grab(enable:Bool) : Bool {
 
@@ -124,13 +132,13 @@ class Runtime extends snow.core.native.Runtime {
 
         return res == 0;
 
-    } //window_grab
+    }
 
     public function window_swap() {
 
         SDL.GL_SwapWindow(window);
 
-    } //window_swap
+    }
 
     override function window_fullscreen(enable:Bool, ?true_fullscreen:Bool=false) : Bool {
 
@@ -142,7 +150,7 @@ class Runtime extends snow.core.native.Runtime {
 
         return SDL.setWindowFullscreen(window, flag) == 0;
 
-    } //window_fullscreen
+    }
 
     override inline public function window_width() :Int return window_w;
     override inline public function window_height() :Int return window_h;
@@ -159,7 +167,7 @@ class Runtime extends snow.core.native.Runtime {
 
         return _pixel_height / _device_height;
 
-    } //window_device_pixel_ratio
+    }
 
 
 
@@ -168,7 +176,7 @@ class Runtime extends snow.core.native.Runtime {
 
         return Timestamp.now() - timestamp_start;
 
-    } //timestamp
+    }
 
     function run_loop() {
 
@@ -194,30 +202,53 @@ class Runtime extends snow.core.native.Runtime {
 
         return _done;
 
-    } //run_loop
+    }
 
     function loop(_) {
 
-        while(SDL.hasAnEvent()) {
+        inline function _loop() {
 
-            var e = SDL.pollEvent();
+            while(SDL.hasAnEvent()) {
 
-            handle_input_ev(e);
-            handle_window_ev(e);
+                var e = SDL.pollEvent();
 
-            if(e.type == SDL_QUIT) {
-                app.dispatch_event(se_quit);
+                current_ev = e;
+
+                handle_input_ev(e);
+                handle_window_ev(e);
+
+                if (handle_sdl_event != null) {
+                    handle_sdl_event(e);
+                }
+
+                if(e.type == SDL_QUIT) {
+                    app.dispatch_event(se_quit);
+                }
+
+                current_ev = null;
+
+            } //SDL has event
+
+            app.dispatch_event(se_tick);
+
+            if(auto_swap && !app.has_shutdown) {
+                window_swap();
             }
 
-        } //SDL has event
-
-        app.dispatch_event(se_tick);
-
-        if(auto_swap && !app.has_shutdown) {
-            window_swap();
+        }
+            
+        if (app.config.runtime.uncaught_error_handler != null) {
+            try {
+                _loop();
+            } catch (e:Dynamic) {
+                app.config.runtime.uncaught_error_handler(e);
+            }
+        }
+        else {
+            _loop();
         }
 
-    } //loop
+    }
 
 
 //Mobile
@@ -247,7 +278,7 @@ class Runtime extends snow.core.native.Runtime {
 
         return 1;
 
-    } //event_watch
+    }
 
 //Window
 
@@ -295,14 +326,14 @@ class Runtime extends snow.core.native.Runtime {
                         window_h = _data2 = to_pixels(_data2);
                 case SDL_WINDOWEVENT_NONE:
 
-            } //switch
+            }
 
             if(_type != we_unknown) {
                 app.dispatch_window_event(_type, e.window.timestamp/1000.0, cast e.window.windowID, _data1, _data2);
             }
         }
 
-    } //handle_window_ev
+    }
 
     var window_w : Int = 0;
     var window_h : Int = 0;
@@ -330,8 +361,19 @@ class Runtime extends snow.core.native.Runtime {
             _debug('sdl / init video');
         }
 
+        #if windows
+            // Get DPI info (needed on windows to adapt window size)
+        var dpiInfo:Array<cpp.Float32> = [];
+        SDL.getDisplayDPI(0, dpiInfo);
+        var window_width:Int = Std.int(config.width * dpiInfo[1] / dpiInfo[3]);
+        var window_height:Int = Std.int(config.height * dpiInfo[2] / dpiInfo[3]);
+        #else
+        var window_width:Int = config.width;
+        var window_height:Int = config.height;
+        #end
+
             //create window
-        window = SDL.createWindow((cast config.title:String), config.x, config.y, config.width, config.height, window_flags(config));
+        window = SDL.createWindow((cast config.title:String), config.x, config.y, window_width, window_height, window_flags(config));
 
         if(window == null) {
             throw Error.error('runtime / sdl / failed to create platform window, unable to recover / `${SDL.getError()}`');
@@ -357,7 +399,7 @@ class Runtime extends snow.core.native.Runtime {
         actual_config = update_window_config(window, actual_config);
         actual_render = update_render_config(window, actual_render);
 
-    } //create_window
+    }
 
     function create_render_context(_window:sdl.Window) : Bool {
 
@@ -398,7 +440,7 @@ class Runtime extends snow.core.native.Runtime {
 
         #end
 
-    } //post_render_context
+    }
 
 //Default flags and attributes
 
@@ -456,7 +498,7 @@ class Runtime extends snow.core.native.Runtime {
             SDL.GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, render.opengl.minor);
         }
 
-    } //apply_GL_attr
+    }
 
     function window_flags(config:WindowConfig) {
 
@@ -464,6 +506,11 @@ class Runtime extends snow.core.native.Runtime {
 
         flags |= SDL_WINDOW_OPENGL;
         flags |= SDL_WINDOW_ALLOW_HIGHDPI;
+
+        #if mac
+        window_hidden_at_startup = true;
+        flags |= SDL_WINDOW_HIDDEN;
+        #end
 
         if(config.resizable)  flags |= SDL_WINDOW_RESIZABLE;
         if(config.borderless) flags |= SDL_WINDOW_BORDERLESS;
@@ -480,7 +527,7 @@ class Runtime extends snow.core.native.Runtime {
 
         return flags;
 
-    } //window_flags
+    }
 
     function update_window_config(_window:sdl.Window, config:WindowConfig) : WindowConfig {
 
@@ -505,7 +552,7 @@ class Runtime extends snow.core.native.Runtime {
 
         return config;
 
-    } //update_window_config
+    }
 
     function update_render_config(_window:sdl.Window, render:RenderConfig) : RenderConfig {
 
@@ -536,7 +583,7 @@ class Runtime extends snow.core.native.Runtime {
 
         return render;
 
-    } //update_render_config
+    }
 
 //Input
 
@@ -772,9 +819,9 @@ class Runtime extends snow.core.native.Runtime {
                     );
                 case _:
 
-        } //switch
+        }
 
-    } //handle_input_ev
+    }
 
     /** Helper to return a `ModState` (shift, ctrl etc) from a given `InputEvent` */
     function to_key_mod( mod_value:Int ) : ModState {
@@ -801,14 +848,15 @@ class Runtime extends snow.core.native.Runtime {
 
         return app.input.mod_state;
 
-    } //to_key_mod
+    }
 
-} //Runtime
+}
 
 typedef WindowHandle = sdl.Window;
 
 typedef RuntimeConfig = {
-    
-    //:todo: potential sdl runtime config
+
+        /** Custom uncaught error handler */
+    public var uncaught_error_handler : Dynamic->Void;
 
 } //RuntimeConfig

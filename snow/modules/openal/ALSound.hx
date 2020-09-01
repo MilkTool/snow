@@ -33,7 +33,7 @@ class ALSound {
         alsource = new_source();
         alformat = source_format();
 
-    } //new
+    }
 
     public function init() {
 
@@ -70,19 +70,19 @@ class ALSound {
 
         err('attach buffer');
 
-    } //init
+    }
 
     function position(_time:Float) {
     
         AL.sourcef(alsource, AL.SEC_OFFSET, _time);
     
-    } //position
+    }
 
     function position_of() {
         
         return AL.getSourcef(alsource, AL.SEC_OFFSET);
 
-    } //position_of
+    }
 
     public function destroy() {
 
@@ -106,14 +106,14 @@ class ALSound {
 
         // alsource = 0;
 
-    } //destroy
+    }
 
     public function tick() : Void {
         
         instance.tick();
         current_time += module.app.host.tick_delta;
 
-    } //tick
+    }
 
 //internal
 
@@ -155,6 +155,6 @@ class ALSound {
 
         return _format;
 
-    } //source_format
+    }
 
-} //ALAudioSource
+}
